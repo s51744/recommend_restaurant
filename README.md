@@ -11,6 +11,7 @@
 
 ### 2. 使用 [`uv`](https://github.com/astral-sh/uv) 安裝依賴（建議）
 ```bash
+pip install uv
 ollama run llama3.2
 uv venv
 uv pip install -r requirements.txt
