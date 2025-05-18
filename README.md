@@ -6,12 +6,12 @@
 
 ## 📦 安裝需求
 
-### 1. Python 環境
-請先安裝 Python 3.10 以上版本。
+### 1.環境
+請先安裝 Python 3.10以上版本及ollama。
 
 ### 2. 使用 [`uv`](https://github.com/astral-sh/uv) 安裝依賴（建議）
 ```bash
-ollama run llama3
+ollama run llama3.2
 uv venv
 uv pip install -r requirements.txt
 
