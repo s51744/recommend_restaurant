@@ -15,10 +15,10 @@ class RandomPicker:
         self.btn_pick = btn_pick
         self.root = root
 
-        # 動畫參數
-        self.interval = 30
-        self.max_interval = 500
-        self.step = 1.3
+        #動畫參數
+        self.interval = 30 #初始速度
+        self.max_interval = 500 #結束速度
+        self.step = 1.3 #倍率
         self.current_interval = self.interval
 
         # 快速模式
