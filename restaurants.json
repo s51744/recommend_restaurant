@@ -9,11 +9,12 @@
       "Thursday": "10:00-20:00",
       "Friday": "10:00-20:00",
       "Saturday": "10:00-20:00",
-      "Sunday": "休息"
+      "Sunday": "10:00-20:00"
     },
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/600px-JavaScript-logo.png",
+    "image_url": "https://tokyo-kitchen.icook.network/uploads/recipe/cover/338564/8869cd181686929d.jpg",
     "calories": 600
   },
+  
   {
     "name": "阿婆臭豆腐",
     "address": "宜蘭市中山路100號",
@@ -23,7 +24,7 @@
       "Wednesday": "10:00-20:00",
       "Thursday": "10:00-20:00",
       "Friday": "10:00-20:00",
-      "Saturday": "休息",
+      "Saturday": "18:00-20:00",
       "Sunday": "休息"
     },
     "image_url": "https://cc.tvbs.com.tw/img/program/upload/2018/10/30/20181030170631-3f05f3b7.jpg",
