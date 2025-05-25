@@ -9,12 +9,28 @@
       "Thursday": "10:00-20:00",
       "Friday": "10:00-20:00",
       "Saturday": "10:00-20:00",
-      "Sunday": "10:00-20:00"
+      "Sunday": "休息"
     },
     "image_url": "https://tokyo-kitchen.icook.network/uploads/recipe/cover/338564/8869cd181686929d.jpg",
-    "calories": 600
+    "calories": 600,
+    "price": 150
   },
-  
+  {
+    "name": "芮誼廚房",
+    "address": "宜蘭市女中路三段51號",
+    "hours": {
+      "Monday": "不明",
+      "Tuesday": "不明",
+      "Wednesday": "不明",
+      "Thursday": "不明",
+      "Friday": "不明",
+      "Saturday": "不明",
+      "Sunday": "不明"
+    },
+    "image_url": "https://scontent.ftpe7-2.fna.fbcdn.net/v/t39.30808-6/317790411_1867493106932562_4336343954408488480_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Frwn73UjKU0Q7kNvwHOfDhk&_nc_oc=AdmzS0YVCpjaAIJJ_Z5FJ0n6JkJfrAwcj7WlQyyw6N_Vq9s9nEh2XAjDceDAlZS52xTlUIrCgy2bA_rUNzCV9XIQ&_nc_zt=23&_nc_ht=scontent.ftpe7-2.fna&_nc_gid=ctYeNnYIVOV7Gn8LTmT6lw&oh=00_AfJc5wV9tIsruV3dGkr-dSI2b-X6ZpUysb_tGC7LiNUoxA&oe=6838750B",
+    "calories": 450,
+    "price": 200
+  },
   {
     "name": "阿婆臭豆腐",
     "address": "宜蘭市中山路100號",
@@ -24,11 +40,12 @@
       "Wednesday": "10:00-20:00",
       "Thursday": "10:00-20:00",
       "Friday": "10:00-20:00",
-      "Saturday": "18:00-20:00",
+      "Saturday": "休息",
       "Sunday": "休息"
     },
     "image_url": "https://cc.tvbs.com.tw/img/program/upload/2018/10/30/20181030170631-3f05f3b7.jpg",
-    "calories": 450
+    "calories": 450,
+    "price": 1500
   },
   {
     "name": "瘦瘦炒麵",
@@ -43,6 +60,23 @@
       "Sunday": "休息"
     },
     "image_url": "https://www.sbfoods-worldwide.com/zh-tw/recipes/umgejl0000000jiy-img/9_FriedRice_L.png",
-    "calories": 888
+    "calories": 888,
+    "price": 300
+  },
+  {
+    "name": "光腳丫",
+    "address": "宜蘭大學對面",
+    "hours": {
+      "Monday": "休息",
+      "Tuesday": "休息",
+      "Wednesday": "休息",
+      "Thursday": "休息",
+      "Friday": "休息",
+      "Saturday": "休息",
+      "Sunday": "不明"
+    },
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipPH10Bpa63QXG-0A5pPTk0lwMOO7xgj4-j4oR8a=s680-w680-h510-rw",
+    "calories": 800,
+    "price": 80
   }
 ]

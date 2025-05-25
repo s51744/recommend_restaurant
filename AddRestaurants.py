@@ -4,40 +4,49 @@ import json
 with open('restaurants.json', 'r', encoding='utf-8') as f:
     restaurants = json.load(f)
 
-print("請輸入新餐廳資料：")
+print("\n請輸入新餐廳資料")
 
 #輸入餐廳名稱
-name = input("名稱: ").strip()
+name = input("店名 : ").strip()
 #輸入地址
-address = input("地址: ").strip()
+address = input("地址 : ").strip()
 
 #輸入營業時間，星期一到日
 hours = {}
 weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+print("\n請輸入營業時間\n格式10:00-21:00 \n若休息請輸入 休息 \n不明請輸入 不明\n")
 for day in weekdays:
-    h = input(f"{day} 營業時間（格式10:00-21:00 若休息請輸入 休息）: ").strip()
+    h = input(f"{day} : ").strip()
     hours[day] = h
 
-image_url = input("圖片網址: ").strip()
+image_url = input("\n圖片網址 : ").strip()
 
+#平均價格輸入
+price_str = input("平均價格 (整數) : ").strip()
+try:
+    price = int(price_str)
+except:
+    price = -1
+    
 #卡路里輸入，要轉成 int，失敗就設為 -1
-calories_str = input("卡路里 (整數): ").strip()
+calories_str = input("卡路里 (整數) : ").strip()
 try:
     calories = int(calories_str)
 except:
     calories = -1
 
-#建立新餐廳d
+#建立新餐廳
 new_restaurant = {
     "name": name,
     "address": address,
     "hours": hours,
     "image_url": image_url,
+    "price": price,
     "calories": calories
 }
 
 # 檢查是否有欄位缺少或錯誤
-required_fields = ["name", "address", "hours", "image_url", "calories"]
+required_fields = ["name", "address", "hours", "image_url", "price", "calories"]
 missing_fields = []
 for field in required_fields:
     val = new_restaurant[field]

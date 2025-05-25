@@ -5,22 +5,23 @@ import requests
 from io import BytesIO
 
 class RandomPicker:
-    def __init__(self, restaurants, label_info, label_img, label_open, label_calories, btn_pick, root):
+    def __init__(self, restaurants, label_info, label_img, label_open, label_price, label_calories, btn_pick, root):
         self.restaurants = restaurants
         self.label_info = label_info
         self.label_img = label_img
         self.label_open = label_open
+        self.label_price = label_price
         self.label_calories = label_calories
         self.btn_pick = btn_pick
         self.root = root
 
-        # 動畫參數
-        self.interval = 50
-        self.max_interval = 800
-        self.step = 1.15
+        #動畫參數
+        self.interval = 30 #初始間隔時間（毫秒）
+        self.max_interval = 500 #最大間隔時間（動畫結束時的速度）
+        self.step = 1.3 #每次間隔變慢的倍率
         self.current_interval = self.interval
 
-        # 是否快速模式 (True = 立刻出結果)
+        #是否快速模式 (True = 立刻出結果)
         self.quick_mode = False
 
     def set_quick_mode(self, quick: bool):
@@ -38,9 +39,12 @@ class RandomPicker:
         elif open_status == "不明":
             open_text = "營業時間未知"
         else:
-            open_text = f"今天營業時間：{open_status}"
+            open_text = f"今天營業時間{open_status}"
         self.label_open.config(text="營業狀態：" + open_text)
-
+        
+        price = chosen.get('price', '不清楚')
+        self.label_price.config(text=f"平均價格：{price} 元")
+        
         calories = chosen.get('calories', '未知')
         self.label_calories.config(text=f"卡路里：{calories} 大卡")
 

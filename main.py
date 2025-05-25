@@ -13,7 +13,8 @@ root.geometry("600x700")
 label_info = tk.Label(root, text="點擊按鈕抽一間餐廳", font=("微軟正黑體", 16))
 label_info.pack(pady=10)
 
-frame_img = tk.Frame(root, width=500, height=400, bg="#eee", relief=tk.SUNKEN)
+root.configure(bg="#fdf6e3")  #奶茶色背景
+frame_img = tk.Frame(root, width=500, height=400, bg="#fff5e1", relief=tk.SUNKEN)
 frame_img.pack(pady=10)
 frame_img.pack_propagate(False)
 
@@ -26,7 +27,17 @@ label_open.pack(pady=5)
 label_calories = tk.Label(root, text="卡路里：", font=("微軟正黑體", 14))
 label_calories.pack(pady=5)
 
-btn_pick = tk.Button(root, text="隨機抽餐廳", font=("微軟正黑體", 14))
+btn_pick = tk.Button(
+    root,
+    text="🎲 隨機抽餐廳",
+    font=("微軟正黑體", 14),
+    bg="#ffb347",
+    fg="white",
+    activebackground="#ffa033",
+    relief="flat",
+    padx=20,
+    pady=10
+)
 btn_pick.pack(pady=10)
 
 picker = RandomPicker(restaurants, label_info, label_img, label_open, label_calories, btn_pick, root)

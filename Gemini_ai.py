@@ -36,6 +36,7 @@ template = """
 {context}
 </餐廳資料>
 
+
 使用者說: {input}
 你的回應：
 """
