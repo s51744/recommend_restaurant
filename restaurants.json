@@ -1,0 +1,47 @@
+[
+  {
+    "name": "小王牛肉麵",
+    "address": "宜蘭市復興路1號",
+    "hours": {
+      "Monday": "10:00-20:00",
+      "Tuesday": "10:00-20:00",
+      "Wednesday": "10:00-20:00",
+      "Thursday": "10:00-20:00",
+      "Friday": "10:00-20:00",
+      "Saturday": "10:00-20:00",
+      "Sunday": "休息"
+    },
+    "image_url": "https://example.com/image1.jpg",
+    "calories": 600
+  },
+  {
+    "name": "阿婆臭豆腐",
+    "address": "宜蘭市中山路100號",
+    "hours": {
+      "Monday": "10:00-20:00",
+      "Tuesday": "10:00-20:00",
+      "Wednesday": "10:00-20:00",
+      "Thursday": "10:00-20:00",
+      "Friday": "10:00-20:00",
+      "Saturday": "休息",
+      "Sunday": "休息"
+    },
+    "image_url": "https://example.com/image2.jpg",
+    "calories": 450
+  },
+  {
+    "name": "瘦瘦炒麵",
+    "address": "宜蘭市大學路888號",
+    "hours": {
+      "Monday": "休息",
+      "Tuesday": "休息",
+      "Wednesday": "休息",
+      "Thursday": "休息",
+      "Friday": "休息",
+      "Saturday": "休息",
+      "Sunday": "休息"
+    },
+    "image_url": "https://youtu.be/dQw4w9WgXcQ?si=s_731fzbVzzyoa-u",
+    "calories": 888
+  }
+]
