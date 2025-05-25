@@ -9,7 +9,7 @@ with open('restaurants.json', 'r', encoding='utf-8') as f:
 bg_color = "#fdf6e3"
 root = tk.Tk()
 root.title("餐廳選擇機")
-root.geometry("600x800")
+root.geometry("600x900")
 
 label_info = tk.Label(root, text="點擊按鈕抽一間餐廳",  bg=bg_color, font=("微軟正黑體", 16))
 label_info.pack(pady=10)
@@ -46,8 +46,17 @@ btn_pick.pack(pady=10)
 
 picker = RandomPicker(restaurants, label_info, label_img, label_open, label_price, label_calories, btn_pick, root)
 btn_pick.config(command=picker.start)
-
-# 快速模式切換按鈕
+#只抽本日有營業的店
+def toggle_open_today():
+    picker.set_filter_open_today(not picker.filter_open_today)
+    if picker.filter_open_today:
+        btn_filter.config(text="只抽今日有營業 (ON)")
+    else:
+        btn_filter.config(text="只抽今日有營業 (OFF)")
+btn_filter = tk.Button(root, text="只抽今日有營業 (OFF)",  bg="#ffb347", activebackground = "#ff7f50", font=("微軟正黑體", 14),relief="flat", command=toggle_open_today)
+btn_filter.pack(pady=10)
+        
+#快速模式切換按鈕
 def toggle_mode():
     picker.set_quick_mode(not picker.quick_mode)
     mode_text = "快速模式" if picker.quick_mode else "慢速模式"

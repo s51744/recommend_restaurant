@@ -41,7 +41,7 @@
       "Thursday": "10:00-20:00",
       "Friday": "10:00-20:00",
       "Saturday": "休息",
-      "Sunday": "休息"
+      "Sunday": "10:00-20:00"
     },
     "image_url": "https://cc.tvbs.com.tw/img/program/upload/2018/10/30/20181030170631-3f05f3b7.jpg",
     "calories": 450,
@@ -57,7 +57,7 @@
       "Thursday": "休息",
       "Friday": "休息",
       "Saturday": "休息",
-      "Sunday": "休息"
+      "Sunday": "10:00-20:00"
     },
     "image_url": "https://www.sbfoods-worldwide.com/zh-tw/recipes/umgejl0000000jiy-img/9_FriedRice_L.png",
     "calories": 888,

@@ -15,19 +15,38 @@ class RandomPicker:
         self.btn_pick = btn_pick
         self.root = root
 
-        #動畫參數
-        self.interval = 30 #初始間隔時間（毫秒）
-        self.max_interval = 500 #最大間隔時間（動畫結束時的速度）
-        self.step = 1.3 #每次間隔變慢的倍率
+        # 動畫參數
+        self.interval = 30
+        self.max_interval = 500
+        self.step = 1.3
         self.current_interval = self.interval
 
-        #是否快速模式 (True = 立刻出結果)
+        # 快速模式
         self.quick_mode = False
+        
+        # 是否只挑今日有營業
+        self.filter_open_today = False
 
     def set_quick_mode(self, quick: bool):
         self.quick_mode = quick
+    
+    def set_filter_open_today(self, filter_open: bool):
+        self.filter_open_today = filter_open
+
+    def get_restaurants_to_pick(self):
+        if not self.filter_open_today:
+            return self.restaurants
+        today = datetime.datetime.today().strftime("%A")
+        filtered = []
+        for r in self.restaurants:
+            hours = r.get('hours', {})
+            status = hours.get(today, "不明")
+            if status != "休息" and status != "不明":
+                filtered.append(r)
+        return filtered
 
     def show_restaurant(self, chosen):
+        # 這邊保持你原本的show_restaurant內容
         info = f"餐廳：{chosen['name']}\n地址：{chosen['address']}"
         self.label_info.config(text=info)
 
@@ -68,20 +87,29 @@ class RandomPicker:
             self.label_img.image = None
 
     def random_animation(self):
+        restaurants_to_pick = self.get_restaurants_to_pick()
+        if not restaurants_to_pick:
+            self.btn_pick.config(state='normal')
+            self.label_info.config(text="今天沒有推薦餐廳營業喔！")
+            self.label_img.config(image='', text="")
+            self.label_img.image = None
+            self.label_open.config(text="")
+            self.label_price.config(text="")
+            self.label_calories.config(text="")
+            return
+
         if self.quick_mode:
-            # 快速模式直接顯示
-            chosen = random.choice(self.restaurants)
+            chosen = random.choice(restaurants_to_pick)
             self.show_restaurant(chosen)
             self.btn_pick.config(state='normal')
         else:
-            # 慢速動畫模式
             if self.current_interval > self.max_interval:
-                chosen = random.choice(self.restaurants)
+                chosen = random.choice(restaurants_to_pick)
                 self.show_restaurant(chosen)
                 self.btn_pick.config(state='normal')
                 self.current_interval = self.interval
             else:
-                chosen = random.choice(self.restaurants)
+                chosen = random.choice(restaurants_to_pick)
                 self.show_restaurant(chosen)
                 self.current_interval = int(self.current_interval * self.step)
                 self.root.after(self.current_interval, self.random_animation)
@@ -90,3 +118,4 @@ class RandomPicker:
         self.btn_pick.config(state='disabled')
         self.current_interval = self.interval
         self.random_animation()
+
