@@ -12,14 +12,14 @@ with open('restaurants.json', 'r', encoding='utf-8') as f:
 bg_color = "#fdf6e3"
 root = tk.Tk()
 root.title("AI 餐廳選擇機")
-root.geometry("600x900")
+root.geometry("600x950")
 root.configure(bg=bg_color)
 
-label_info = tk.Label(root, text="點擊按鈕抽一間餐廳",  bg=bg_color, font=("微軟正黑體", 16))
-label_info.pack(pady=10)
+label_info = tk.Label(root, text="點擊按鈕抽一間餐廳",  bg=bg_color, font=("微軟正黑體", 14))
+label_info.pack(pady=8)
 
-frame_img = tk.Frame(root, width=500, height=400, bg=bg_color, relief=tk.SUNKEN)
-frame_img.pack(pady=10)
+frame_img = tk.Frame(root, width=500, height=300, bg=bg_color, relief=tk.SUNKEN)
+frame_img.pack(pady=8)
 frame_img.pack_propagate(False)
 
 label_img = tk.Label(frame_img, text="圖片顯示區", bg="#eee")
@@ -35,7 +35,7 @@ label_calories = tk.Label(root, text="卡路里：", bg=bg_color,  font=("微軟
 label_calories.pack(pady=5)
 
 btn_pick = tk.Button(root, text="\U0001F3B2 隨機抽餐廳", font=("微軟正黑體", 14), bg="#ffb347", activebackground="#ffa033", relief="flat", padx=20, pady=10)
-btn_pick.pack(pady=10)
+btn_pick.pack(pady=8)
 
 picker = RandomPicker(restaurants, label_info, label_img, label_open, label_price, label_calories, btn_pick, root)
 btn_pick.config(command=picker.start)
