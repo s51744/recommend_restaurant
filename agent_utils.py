@@ -1,45 +1,64 @@
-# agent_utils.py
-
 import json
+from datetime import datetime
 from langchain_ollama import ChatOllama
 from langchain.prompts import ChatPromptTemplate
-from datetime import datetime
+import re
 
 def get_ai_recommendation(preference, restaurants):
-    from langchain.prompts import ChatPromptTemplate
     from langchain_community.chat_models import ChatOllama
 
-    # 初始化 LLM
     llm = ChatOllama(model="llama3.2", temperature=0.7)
 
-    # Step 1: 過濾今日有營業的餐廳
-    today = datetime.today().strftime("%A")  # e.g., 'Monday'
+    today = datetime.today().strftime("%A")
     open_today = [r for r in restaurants if r["hours"].get(today, "") not in ["休息", "不明"]]
 
-    # 若沒有符合的店家，回傳提示
     if not open_today:
-        return "今天沒有符合條件的餐廳喔！"
+        return "今天附近的店都沒開，請稍後再試。"
 
-    # Step 2: 整理格式提供給模型
+    keywords = ["拉麵", "便當", "飯", "麵", "燒肉", "鍋", "雞排", "壽司", "餃子", "義大利", "炸", "咖哩"]
+    matched_keyword = next((kw for kw in keywords if kw in preference), None)
+
+    # 加強嚴格：只要不含關鍵字的就排在後面
+    if matched_keyword:
+        keyword_matched = [
+            r for r in open_today
+            if matched_keyword in r["name"] or matched_keyword in r["address"]
+        ]
+        if not keyword_matched:
+            return f"找不到和「{matched_keyword}」有關的餐廳喔，換個說法試試看？"
+
+        selected = keyword_matched[:3]
+    else:
+        selected = open_today[:3]
+
     def describe(r):
         hours = ', '.join([f"{day}: {status}" for day, status in r['hours'].items()])
-        return f"餐廳名稱：{r['name']}\n地址：{r['address']}\n營業時間：{hours}\n平均價格：{r['price']} 元\n預估卡路里：{r['calories']} 大卡"
+        return (
+            f"餐廳名稱：{r['name']}\n"
+            f"地址：{r['address']}\n"
+            f"營業時間：{hours}\n"
+            f"價格：約 {r['price']} 元\n"
+            f"卡路里：約 {r['calories']} 大卡"
+        )
 
-    context = "\n\n".join([describe(r) for r in open_today])
+    context = "\n\n".join([describe(r) for r in selected])
 
-    # Step 3: 提示詞
     template = ChatPromptTemplate.from_template("""
-你是一個美食推薦助理，請根據下列附近餐廳資料與使用者需求推薦餐廳。
-請綜合考量「價格（根據使用者偏好）」與「當天是否有營業」。
+你是一位熟悉宜蘭在地美食的推薦助手，請根據使用者輸入與下方餐廳資料，推薦最多三間餐廳。
+推薦要有理由，每間風格盡量不同（如價位、口味、份量等）。
+語氣自然、清楚，不需過度嘴砲或太冷冰冰。
+最後請加一句自然的結尾，例如「這幾家都不錯，你想試哪一間呢？」
+請用**繁體中文**回答，**不要使用簡體字**。
 
-<餐廳資料>
+<附近餐廳資料>
 {context}
-</餐廳資料>
+</附近餐廳資料>
 
 使用者說：{input}
-你的回應：
 """)
 
     chain_input = {"input": preference, "context": context}
     response = llm.invoke(template.format(**chain_input))
-    return response.content.strip()
+
+    cleaned = re.sub(r"\*\*(.*?)\*\*", r"\1", response.content.strip())
+    return cleaned
