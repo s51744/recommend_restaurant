@@ -18,6 +18,9 @@
   {
     "name": "光腳ㄚ",
     "address": "260宜蘭縣宜蘭市神農路一段80號",
+    "price": 100,
+    "calories": 1000,
+    "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nr85mc8YHrM7Q3GFzQJIjK9CR-2wcsvO-icIFiV9O6dtvl-BS-Pdthn2jTyg38bz12T10aNvIFGn7NENzHqL6oiym6C8hUIkigVykLBbJJ9jAxsQ26FGSBKtJ8KypI2hcVAlscaBYAPmhQ=s680-w680-h510-rw",
     "hours": {
       "Monday": "11:00-13:00、16:30-19:30",
       "Tuesday": "11:00-13:00、16:30-19:30",
@@ -26,10 +29,7 @@
       "Friday": "11:00-13:00、16:30-19:30",
       "Saturday": "休息",
       "Sunday": "休息"
-    },
-    "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nr85mc8YHrM7Q3GFzQJIjK9CR-2wcsvO-icIFiV9O6dtvl-BS-Pdthn2jTyg38bz12T10aNvIFGn7NENzHqL6oiym6C8hUIkigVykLBbJJ9jAxsQ26FGSBKtJ8KypI2hcVAlscaBYAPmhQ=s680-w680-h510-rw",
-    "calories": 1000,
-    "price": 100
+    }
   },
   {
     "name": "麥當勞",

@@ -100,7 +100,7 @@ class RandomPicker:
             try:
                 response = requests.get(url)
                 img = Image.open(BytesIO(response.content))
-                img.thumbnail((500, 300), Image.LANCZOS)
+                img.thumbnail((500, 400), Image.LANCZOS)
                 photo = ImageTk.PhotoImage(img)
                 self.label_img.config(image=photo, text="", bg="black")
                 self.label_img.image = photo
