@@ -16,6 +16,9 @@ class RandomPicker:
         self.label_img = label_img
         self.btn_pick = btn_pick
         self.root = root
+        self.last_picked_name = None
+        self.last_picked_address = None
+        self.root = root
 
         self.interval = 30
         self.max_interval = 500
@@ -70,7 +73,9 @@ class RandomPicker:
             open_text = f"🕒 今天營業時間：{open_status}"
 
         name = chosen.get('name', '未知')
+        self.last_picked_name = name
         address = chosen.get('address', '未知')
+        self.last_picked_address = address
         price = chosen.get('price', '未知')
         calories = chosen.get('calories', '未知')
 

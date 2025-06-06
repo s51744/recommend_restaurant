@@ -9,6 +9,8 @@ import requests
 from io import BytesIO
 import pygame
 import threading
+import webbrowser
+
 
 # 初始化音效
 pygame.mixer.init()
@@ -18,6 +20,14 @@ pygame.mixer.music.play(-1)  # -1 表示無限循環
 sound_enabled = True
 music_enabled = True
 
+def open_map_for_restaurant(name, address=""):
+    if name:
+        query = f"{name} {address}".replace(" ", "+")
+        url = f"https://www.google.com/maps/search/?api=1&query={query}"
+        webbrowser.open(url)
+    else:
+        messagebox.showwarning("錯誤", "請先抽選餐廳")
+        
 # 音效播放函式
 def play_sound(sound_path):
     def _play():
@@ -132,6 +142,8 @@ create_range_input("價格", entry_price_min, entry_price_max)
 
 # --- 初始化 Picker ---
 picker = RandomPicker(restaurants, label_info, label_img, btn_pick=None, root=root)
+selected_restaurant_name = None
+
 
 def safe_int(entry, default):
     val = entry.get().strip()
@@ -160,6 +172,11 @@ def start_with_filter():
         picker.start()
     except Exception as e:
         messagebox.showerror("錯誤", f"請確認欄位內容為數字\n錯誤訊息：{str(e)}")
+        
+    global selected_restaurant_name
+    selected_restaurant_name = picker.last_picked_name  # 自訂屬性存下餐廳名稱
+    btn_map.config(state=tk.NORMAL)
+
 
 def start_with_filter_with_sound():
     play_sound("sounds/button.mp3")
@@ -180,6 +197,7 @@ def get_recommendation():
 def get_recommendation_with_sound():
     play_sound("sounds/bot.wav")
     get_recommendation()
+    
 
 # --- 按鈕區 ---
 btn_frame = tk.Frame(root, bg=bg_color)
@@ -206,6 +224,13 @@ btn_manage = tk.Button(root, text="📂 管理餐廳資料", command=open_manage
                        bg="#3a3a5a", fg="white", font=("微軟正黑體", 11), relief="flat")
 btn_manage.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
 
+btn_map = tk.Button(root, text="📍 打開地圖", font=("微軟正黑體", 11, "bold"),
+                    command=lambda: open_map_for_restaurant(picker.last_picked_name, picker.last_picked_address),
+                    bg="#00cc99", fg="black", activebackground="#00ffaa",
+                    relief="raised", bd=2, cursor="hand2", state=tk.DISABLED)
+btn_map.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
+
+
 # --- AI 區 ---
 ai_input_frame = tk.Frame(root, bg=bg_color)
 ai_input_frame.pack(pady=10)
@@ -219,4 +244,6 @@ btn_ai = tk.Button(ai_input_frame, text="🤖 AI 推薦午餐", font=("微軟正
                    relief="flat", width=18)
 btn_ai.pack(side=tk.LEFT, padx=(10, 0))
 
+        
 root.mainloop()
+
