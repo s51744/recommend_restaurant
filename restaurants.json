@@ -2,6 +2,9 @@
   {
     "name": "芮誼廚房",
     "address": "宜蘭市女中路三段51號",
+    "price": 150,
+    "calories": 450,
+    "image_url": "https://scontent.ftpe12-2.fna.fbcdn.net/v/t39.30808-6/474393492_584214837851443_5645442884436142964_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=aSzAFUtzhkkQ7kNvwFy5-_E&_nc_oc=AdkGn30IXRgTUbkMaduIndxxw5kA52N01B4PKV0CjQWALjieTjmaojpt5nzLonBgm-btrvS5VqEVbAz1m3Uy3ZIU&_nc_zt=23&_nc_ht=scontent.ftpe12-2.fna&_nc_gid=ajXPjv6W9o7QMCqj0wlhDA&oh=00_AfO73ek3rORjMBGPvoZz8E6MTrSDb6bOu-RxL0PfyETxFA&oe=68488528",
     "hours": {
       "Monday": "不明",
       "Tuesday": "不明",
@@ -10,20 +13,17 @@
       "Friday": "不明",
       "Saturday": "不明",
       "Sunday": "不明"
-    },
-    "image_url": "https://scontent.ftpe7-2.fna.fbcdn.net/v/t39.30808-6/317790411_1867493106932562_4336343954408488480_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Frwn73UjKU0Q7kNvwHOfDhk&_nc_oc=AdmzS0YVCpjaAIJJ_Z5FJ0n6JkJfrAwcj7WlQyyw6N_Vq9s9nEh2XAjDceDAlZS52xTlUIrCgy2bA_rUNzCV9XIQ&_nc_zt=23&_nc_ht=scontent.ftpe7-2.fna&_nc_gid=ctYeNnYIVOV7Gn8LTmT6lw&oh=00_AfJc5wV9tIsruV3dGkr-dSI2b-X6ZpUysb_tGC7LiNUoxA&oe=6838750B",
-    "calories": 450,
-    "price": 150
+    }
   },
   {
     "name": "光腳ㄚ",
     "address": "260宜蘭縣宜蘭市神農路一段80號",
     "hours": {
-      "Monday": "11:00-13:00、16:30-19:30",
-      "Tuesday": "11:00-13:00、16:30-19:30",
-      "Wednesday": "11:00-13:00、16:30-19:30",
-      "Thursday": "11:00-13:00、16:30-19:30",
-      "Friday": "11:00-13:00、16:30-19:30",
+      "Monday": "11:00-13:00-16:30-19:30",
+      "Tuesday": "11:00-13:00-16:30-19:30",
+      "Wednesday": "11:00-13:00-16:30-19:30",
+      "Thursday": "11:00-13:00-16:30-19:30",
+      "Friday": "11:00-13:00-16:30-19:30",
       "Saturday": "休息",
       "Sunday": "休息"
     },
@@ -67,12 +67,12 @@
     "name": "再一碗",
     "address": "260宜蘭縣宜蘭市農權路二段30之2號",
     "hours": {
-      "Monday": "11:00-13:30、16:30-19:30",
-      "Tuesday": "11:00-13:30、16:30-19:30",
-      "Wednesday": "11:00-13:30、16:30-19:30",
-      "Thursday": "11:00-13:30、16:30-19:30",
-      "Friday": "11:00-13:30、16:30-19:30",
-      "Saturday": "11:00-13:30、16:30-19:30",
+      "Monday": "11:00-13:30-16:30-19:30",
+      "Tuesday": "11:00-13:30-16:30-19:30",
+      "Wednesday": "11:00-13:30-16:30-19:30",
+      "Thursday": "11:00-13:30-16:30-19:30",
+      "Friday": "11:00-13:30-16:30-19:30",
+      "Saturday": "11:00-13:30-16:30-19:30",
       "Sunday": "休息"
     },
     "image_url": "https://tb-static.uber.com/prod/image-proc/processed_images/a9c06937b75a5efda2769a34726fb9f8/58f691da9eaef86b0b51f9b2c483fe63.jpeg",
@@ -116,12 +116,12 @@
     "address": "26059宜蘭縣宜蘭市女中路三段139號",
     "hours": {
       "Monday": "休息",
-      "Tuesday": "11:00-14:30、17:00-20:30",
-      "Wednesday": "11:00-14:30、17:00-20:30",
-      "Thursday": "11:00-14:30、17:00-20:30",
-      "Friday": "11:00-14:30、17:00-20:30",
-      "Saturday": "11:00-14:30、17:00-20:30",
-      "Sunday": "11:00-14:30、17:00-20:30"
+      "Tuesday": "11:00-14:30-17:00-20:30",
+      "Wednesday": "11:00-14:30-17:00-20:30",
+      "Thursday": "11:00-14:30-17:00-20:30",
+      "Friday": "11:00-14:30-17:00-20:30",
+      "Saturday": "11:00-14:30-17:00-20:30",
+      "Sunday": "11:00-14:30-17:00-20:30"
     },
     "image_url": "https://lh3.googleusercontent.com/Xe0k_VS-mYJo2CR21e1T6hY-b_V8bKqH8OXT63TxNo7YtvN6EVEkfjdLNcIOjHtruzYE_wZNQWFHTTx6OqNLnTRay8mMuu70Pas2C0ypU-A2WA=s800",
     "calories": 450,
@@ -147,13 +147,13 @@
     "name": "莿牛牛排館",
     "address": "260宜蘭縣宜蘭市農權路246號",
     "hours": {
-      "Monday": "11:30-14:00、17:00-21:00",
+      "Monday": "11:30-14:00-17:00-21:00",
       "Tuesday": "休息",
-      "Wednesday": "11:30-14:00、17:00-21:00",
-      "Thursday": "11:30-14:00、17:00-21:00",
-      "Friday": "11:30-14:00、17:00-21:00",
-      "Saturday": "11:30-14:00、17:00-21:00",
-      "Sunday": "11:30-14:00、17:00-21:00"
+      "Wednesday": "11:30-14:00-17:00-21:00",
+      "Thursday": "11:30-14:00-17:00-21:00",
+      "Friday": "11:30-14:00-17:00-21:00",
+      "Saturday": "11:30-14:00-17:00-21:00",
+      "Sunday": "11:30-14:00-17:00-21:00"
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/yt6j-listing.jpg",
     "calories": 400,
@@ -179,13 +179,13 @@
     "name": "赤城鐵板燒料理",
     "address": "260宜蘭縣宜蘭市進士路96號",
     "hours": {
-      "Monday": "11:00-14:00、17:00-20:30",
-      "Tuesday": "11:00-14:00、17:00-20:30",
+      "Monday": "11:00-14:00-17:00-20:30",
+      "Tuesday": "11:00-14:00-17:00-20:30",
       "Wednesday": "休息",
-      "Thursday": "11:00-14:00、17:00-20:30",
-      "Friday": "11:00-14:00、17:00-20:30",
-      "Saturday": "11:00-14:00、17:00-20:30",
-      "Sunday": "11:00-14:00、17:00-20:30"
+      "Thursday": "11:00-14:00-17:00-20:30",
+      "Friday": "11:00-14:00-17:00-20:30",
+      "Saturday": "11:00-14:00-17:00-20:30",
+      "Sunday": "11:00-14:00-17:00-20:30"
     },
     "image_url": "https://lh5.googleusercontent.com/p/AF1QipNr_GRW2sQ07Hh7FyRnQzwYH3U3qyWjLVuD-ynB=s1024",
     "calories": 670,
@@ -227,11 +227,11 @@
     "name": "艾奇司義式廚房",
     "address": "260宜蘭縣宜蘭市女中路三段103號",
     "hours": {
-      "Monday": "11:30-14:00、17:00-20:00",
-      "Tuesday": "11:30-14:00、17:00-20:00",
-      "Wednesday": "11:30-14:00、17:00-20:00",
-      "Thursday": "11:30-14:00、17:00-20:00",
-      "Friday": "11:30-14:00、17:00-20:00",
+      "Monday": "11:30-14:00-17:00-20:00",
+      "Tuesday": "11:30-14:00-17:00-20:00",
+      "Wednesday": "11:30-14:00-17:00-20:00",
+      "Thursday": "11:30-14:00-17:00-20:00",
+      "Friday": "11:30-14:00-17:00-20:00",
       "Saturday": "休息",
       "Sunday": "休息"
     },
@@ -259,12 +259,12 @@
     "name": "享米飯堂 Siang Mi Fan Tang",
     "address": "260宜蘭縣宜蘭市女中路三段143號",
     "hours": {
-      "Monday": "11:00-14:00、16:30-19:00",
-      "Tuesday": "11:00-14:00、16:30-19:00",
-      "Wednesday": "11:00-14:00、16:30-19:00",
-      "Thursday": "11:00-14:00、16:30-19:00",
-      "Friday": "11:00-14:00、16:30-19:00",
-      "Saturday": "11:00-14:00、16:30-19:00",
+      "Monday": "11:00-14:00-16:30-19:00",
+      "Tuesday": "11:00-14:00-16:30-19:00",
+      "Wednesday": "11:00-14:00-16:30-19:00",
+      "Thursday": "11:00-14:00-16:30-19:00",
+      "Friday": "11:00-14:00-16:30-19:00",
+      "Saturday": "11:00-14:00-16:30-19:00",
       "Sunday": "休息"
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/ka6n-hero.jpg?width=512&height=384&quality=45",
@@ -275,11 +275,11 @@
     "name": "歡喜堂 便當-快餐",
     "address": "260宜蘭縣宜蘭市女中路三段129號",
     "hours": {
-      "Monday": "10:30-13:30、16:30-20:00",
-      "Tuesday": "10:30-13:30、16:30-20:00",
-      "Wednesday": "10:30-13:30、16:30-20:00",
-      "Thursday": "10:30-13:30、16:30-20:00",
-      "Friday": "10:30-13:30、16:30-20:00",
+      "Monday": "10:30-13:30-16:30-20:00",
+      "Tuesday": "10:30-13:30-16:30-20:00",
+      "Wednesday": "10:30-13:30-16:30-20:00",
+      "Thursday": "10:30-13:30-16:30-20:00",
+      "Friday": "10:30-13:30-16:30-20:00",
       "Saturday": "休息",
       "Sunday": "休息"
     },
@@ -379,7 +379,7 @@
       "Saturday": "11:30-20:30",
       "Sunday": "11:30-20:30"
     },
-    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4u0pSWjAw3aaJXTjugZJM6T7DA8yaXkwKVw&s",
+    "image_url": "https://tour-hualien-ws.hl.gov.tw/001/Upload/435/relpic/12302/709/f877ec23-af1d-45c9-b930-43a93a97bd67.jpeg",
     "calories": 800,
     "price": 100
   },
@@ -435,13 +435,13 @@
     "name": "牛麵",
     "address": "268宜蘭縣五結鄉中正路一段107號",
     "hours": {
-      "Monday": "11:30-15:00、17:00-20:30",
-      "Tuesday": "11:30-15:00、17:00-20:30",
-      "Wednesday": "11:30-15:00、17:00-20:30",
-      "Thursday": "11:30-15:00、17:00-20:30",
-      "Friday": "11:30-15:00、17:00-20:30",
-      "Saturday": "11:30-15:00、17:00-20:30",
-      "Sunday": "11:30-15:00、17:00-20:30"
+      "Monday": "11:30-15:00-17:00-20:30",
+      "Tuesday": "11:30-15:00-17:00-20:30",
+      "Wednesday": "11:30-15:00-17:00-20:30",
+      "Thursday": "11:30-15:00-17:00-20:30",
+      "Friday": "11:30-15:00-17:00-20:30",
+      "Saturday": "11:30-15:00-17:00-20:30",
+      "Sunday": "11:30-15:00-17:00-20:30"
     },
     "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nr_J0Fw6WbOTWy20g-i1QxDZksGUKaVdcVOKTFVO05fO2uvunxOCISX_7YXHBp0XIaCe36--y9wWPHqzvRi4YhNG9lGNZeGyuvooK4OZI44DP0zemUiR-btD34U0eExsXv8ZXEEJw=s1360-w1360-h1020-rw",
     "calories": 900,
@@ -479,5 +479,4 @@
     "calories": 840,
     "price": 120
   }
-
 ]

@@ -3,6 +3,7 @@ from tkinter import messagebox
 import json
 from random_anim import RandomPicker
 from agent_utils import get_ai_recommendation
+from restaurant_manager import open_manager_window
 
 # 載入餐廳資料
 with open('restaurants.json', 'r', encoding='utf-8') as f:
@@ -16,7 +17,7 @@ accent_color = "#00ffc3"
 
 root = tk.Tk()
 root.title("餐廳選擇機")
-root.geometry("980x600")
+root.geometry("980x648")
 root.configure(bg=bg_color)
 root.resizable(True, True)
 
@@ -34,7 +35,7 @@ left_frame = tk.Frame(main_frame, bg=bg_color, bd=2, relief=tk.RIDGE)
 left_frame.pack(side=tk.LEFT, fill=tk.Y, padx=10, pady=10)
 
 # 固定圖片區尺寸
-frame_img = tk.Frame(left_frame, width=500, height=350, bg="black", bd=2)
+frame_img = tk.Frame(left_frame, width=500, height=400, bg="black", bd=2)
 frame_img.pack()
 frame_img.pack_propagate(False)
 
@@ -64,7 +65,7 @@ def toggle_open_today():
 
 btn_filter = tk.Button(btn_frame, text="只抽今日有營業 (OFF)", command=toggle_open_today,
                        bg=btn_color, fg=fg_color, activebackground=accent_color,
-                       font=("微軟正黑體", 11), width=22, relief="flat")
+                       font=("微軟正黑體", 14, "bold"), width=24, padx=14, pady=8)
 btn_filter.pack(side=tk.LEFT, padx=10)
 
 def toggle_mode():
@@ -73,12 +74,17 @@ def toggle_mode():
 
 btn_toggle = tk.Button(btn_frame, text="🎯 模式: 慢速模式", command=toggle_mode,
                        bg=btn_color, fg=fg_color, activebackground=accent_color,
-                       font=("微軟正黑體", 11), width=22, relief="flat")
+                       font=("微軟正黑體", 14, "bold"), width=24, padx=14, pady=8)
 btn_toggle.pack(side=tk.LEFT, padx=10)
 
-btn_pick = tk.Button(btn_frame, text="🎲 隨機抽餐廳", font=("微軟正黑體", 11, "bold"),
-                     command=None, bg=accent_color, fg="black", relief="flat", width=22)
+btn_pick = tk.Button(btn_frame, text="🎲 隨機抽餐廳", font=("微軟正黑體", 14, "bold"), width=24, padx=14, pady=8,
+                     command=None, bg=accent_color, fg="black", relief="flat")
 btn_pick.pack(side=tk.LEFT, padx=10)
+
+btn_manage = tk.Button(root, text="📂 管理餐廳資料", command=open_manager_window,
+                       bg="#3a3a5a", fg="white", font=("微軟正黑體", 11), relief="flat")
+btn_manage.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
+
 
 # --- AI 區 ---
 def get_recommendation():
@@ -89,14 +95,17 @@ def get_recommendation():
     result = get_ai_recommendation(preference, restaurants)
     messagebox.showinfo("AI 推薦結果", result)
 
-entry_preference = tk.Entry(root, font=("微軟正黑體", 11), width=40)
-entry_preference.pack(pady=5)
+ai_input_frame = tk.Frame(root, bg=bg_color)
+ai_input_frame.pack(pady=10)
+
+entry_preference = tk.Entry(ai_input_frame, font=("微軟正黑體", 11), width=40)
+entry_preference.pack(side=tk.LEFT, padx=(0, 10))
 entry_preference.insert(0, "")
 
-btn_ai = tk.Button(root, text="🤖 AI 推薦午餐", font=("微軟正黑體", 12, "bold"),
+btn_ai = tk.Button(ai_input_frame, text="🤖 AI 推薦午餐", font=("微軟正黑體", 11, "bold"),
                    command=get_recommendation, bg="#00ffaa", fg="black",
-                   relief="flat", width=22)
-btn_ai.pack(pady=10)
+                   relief="flat", width=18)
+btn_ai.pack(side=tk.LEFT)
 
 # 初始化 Picker
 picker = RandomPicker(restaurants, label_info, label_img, btn_pick, root)
