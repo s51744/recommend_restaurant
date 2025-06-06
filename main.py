@@ -15,7 +15,10 @@ pygame.mixer.init()
 pygame.mixer.music.load("sounds/bg.wav")
 pygame.mixer.music.play(-1)  # -1 表示無限循環
 
+sound_enabled = True
+music_enabled = True
 
+# 音效播放函式
 def play_sound(sound_path):
     def _play():
         try:
@@ -23,6 +26,17 @@ def play_sound(sound_path):
         except Exception as e:
             print(f"音效播放失敗: {e}")
     threading.Thread(target=_play, daemon=True).start()
+
+# 音樂控制函式
+def toggle_music():
+    global music_enabled
+    music_enabled = not music_enabled
+    if music_enabled:
+        pygame.mixer.music.play(-1)
+        btn_music.config(text="🎵")
+    else:
+        pygame.mixer.music.stop()
+        btn_music.config(text="❌")
 
 # 載入餐廳資料
 with open('restaurants.json', 'r', encoding='utf-8') as f:
@@ -39,6 +53,11 @@ root.title("餐廳選擇機")
 root.geometry("980x690")
 root.configure(bg=bg_color)
 root.resizable(True, True)
+
+# 音效開關按鈕（僅控制背景音樂）
+btn_music = tk.Button(root, text="🎵", command=toggle_music,
+                      bg=bg_color, fg="white", font=("微軟正黑體", 12), relief="flat")
+btn_music.place(x=10, y=10)
 
 # --- 標題 ---
 title_label = tk.Label(root, text="🍜 餐廳選擇機", bg=bg_color, fg=accent_color,
@@ -118,27 +137,17 @@ def safe_int(entry, default):
     val = entry.get().strip()
     return int(val) if val.isdigit() else default
 
-def toggle_open_today():
-    picker.set_filter_open_today(not picker.filter_open_today)
-    btn_filter.config(text=f"只抽今日有營業 ({'ON' if picker.filter_open_today else 'OFF'})")
-
 def toggle_open_today_with_sound():
     new_state = not picker.filter_open_today
     picker.set_filter_open_today(new_state)
     btn_filter.config(text=f"只抽今日有營業 ({'ON' if new_state else 'OFF'})")
     play_sound("sounds/open.wav" if new_state else "sounds/close.wav")
 
-
-def toggle_mode():
-    picker.set_quick_mode(not picker.quick_mode)
-    btn_toggle.config(text=f"🎯 模式: {'快速模式' if picker.quick_mode else '慢速模式'}")
-
 def toggle_mode_with_sound():
     new_state = not picker.quick_mode
     picker.set_quick_mode(new_state)
     btn_toggle.config(text=f"🎯 模式: {'快速模式' if new_state else '慢速模式'}")
     play_sound("sounds/open.wav" if new_state else "sounds/close.wav")
-
 
 def start_with_filter():
     try:
