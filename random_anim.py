@@ -113,10 +113,30 @@ class RandomPicker:
         restaurants_to_pick = self.get_restaurants_to_pick()
         if not restaurants_to_pick:
             self.btn_pick.config(state='normal')
-            self.label_info.config(text="😢 沒有符合條件的餐廳")
-            self.label_img.config(image='', text="😴", bg="black")
-            self.label_img.image = None
+            self.label_info.config(
+                text="😩 沒有符合條件的餐廳！\n\n你太挑了啦！再不放寬一點，連泡麵都沒得吃 🍜",
+                font=("微軟正黑體", 13),
+                justify="left",
+                anchor="w",
+                wraplength=400,
+                pady=10
+            )
+
+            try:
+                img_url = "https://www.niusnews.com/upload/posts/po5_29953_1421316750.jpg"
+                response = requests.get(img_url)
+                img = Image.open(BytesIO(response.content))
+                img.thumbnail((500, 300), Image.LANCZOS)
+                photo = ImageTk.PhotoImage(img)
+
+                self.label_img.config(image=photo, text="", bg="black")
+                self.label_img.image = photo
+            except Exception:
+                self.label_img.config(image='', text="⚠️ 圖片載入失敗", bg="black", fg="gray")
+                self.label_img.image = None
+
             return
+
 
         if self.quick_mode:
             chosen = random.choice(restaurants_to_pick)
