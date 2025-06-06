@@ -3,6 +3,11 @@ import datetime
 from PIL import Image, ImageTk
 import requests
 from io import BytesIO
+import pygame
+import threading
+
+# 初始化 pygame mixer
+pygame.mixer.init()
 
 class RandomPicker:
     def __init__(self, restaurants, label_info, label_img, btn_pick, root):
@@ -12,7 +17,6 @@ class RandomPicker:
         self.btn_pick = btn_pick
         self.root = root
 
-        # 動畫參數
         self.interval = 30
         self.max_interval = 500
         self.step = 1.3
@@ -21,7 +25,6 @@ class RandomPicker:
         self.quick_mode = False
         self.filter_open_today = False
 
-        # 篩選條件（預設為最大範圍）
         self.calorie_min = 0
         self.calorie_max = float("inf")
         self.price_min = 0
@@ -43,20 +46,16 @@ class RandomPicker:
 
     def get_restaurants_to_pick(self):
         today = datetime.datetime.today().strftime("%A")
-
-        # 僅符合價格與卡路里範圍的餐廳
         filtered = [
             r for r in self.restaurants
             if self.calorie_min <= r.get("calories", 0) <= self.calorie_max
             and self.price_min <= r.get("price", 0) <= self.price_max
         ]
-
         if self.filter_open_today:
             filtered = [
                 r for r in filtered
                 if r.get("hours", {}).get(today, "") not in ["休息", "不明"]
             ]
-
         return filtered
 
     def show_restaurant(self, chosen):
@@ -95,14 +94,12 @@ class RandomPicker:
         if url:
             try:
                 response = requests.get(url)
-                img_data = response.content
-                img = Image.open(BytesIO(img_data))
+                img = Image.open(BytesIO(response.content))
                 img.thumbnail((500, 300), Image.LANCZOS)
                 photo = ImageTk.PhotoImage(img)
-
                 self.label_img.config(image=photo, text="", bg="black")
                 self.label_img.image = photo
-            except Exception:
+            except:
                 self.label_img.config(image='', text="⚠️ 圖片載入失敗", bg="black", fg="gray")
                 self.label_img.image = None
         else:
@@ -121,33 +118,32 @@ class RandomPicker:
                 wraplength=400,
                 pady=10
             )
-
             try:
                 img_url = "https://www.niusnews.com/upload/posts/po5_29953_1421316750.jpg"
                 response = requests.get(img_url)
                 img = Image.open(BytesIO(response.content))
                 img.thumbnail((500, 300), Image.LANCZOS)
                 photo = ImageTk.PhotoImage(img)
-
                 self.label_img.config(image=photo, text="", bg="black")
                 self.label_img.image = photo
-            except Exception:
+            except:
                 self.label_img.config(image='', text="⚠️ 圖片載入失敗", bg="black", fg="gray")
                 self.label_img.image = None
-
             return
-
 
         if self.quick_mode:
             chosen = random.choice(restaurants_to_pick)
             self.show_restaurant(chosen)
             self.btn_pick.config(state='normal')
+            self.play_ding()
         else:
             if self.current_interval > self.max_interval:
                 chosen = random.choice(restaurants_to_pick)
                 self.show_restaurant(chosen)
                 self.btn_pick.config(state='normal')
                 self.current_interval = self.interval
+                self.stop_tick()
+                self.play_ding()
             else:
                 chosen = random.choice(restaurants_to_pick)
                 self.show_restaurant(chosen)
@@ -157,4 +153,64 @@ class RandomPicker:
     def start(self):
         self.btn_pick.config(state='disabled')
         self.current_interval = self.interval
+
+        restaurants_to_pick = self.get_restaurants_to_pick()
+        if not restaurants_to_pick:
+            self.btn_pick.config(state='normal')
+            self.label_info.config(
+                text="😩 沒有符合條件的餐廳！\n\n你太挑了啦！再不放寬一點，連泡麵都沒得吃 🍜",
+                font=("微軟正黑體", 13),
+                justify="left",
+                anchor="w",
+                wraplength=400,
+                pady=10
+            )
+            try:
+                img_url = "https://www.niusnews.com/upload/posts/po5_29953_1421316750.jpg"
+                response = requests.get(img_url)
+                img = Image.open(BytesIO(response.content))
+                img.thumbnail((500, 300), Image.LANCZOS)
+                photo = ImageTk.PhotoImage(img)
+                self.label_img.config(image=photo, text="", bg="black")
+                self.label_img.image = photo
+            except:
+                self.label_img.config(image='', text="⚠️ 圖片載入失敗", bg="black", fg="gray")
+                self.label_img.image = None
+
+            # 撥放哭音效
+            def _cry():
+                try:
+                    pygame.mixer.Sound("sounds/cry.mp3").play()
+                except:
+                    pass
+            threading.Thread(target=_cry, daemon=True).start()
+            return
+
+        # 只有在有資料時才播放 tick 音效
+        if not self.quick_mode:
+            self.play_tick()
+
         self.random_animation()
+
+
+    def play_tick(self):
+        def _tick():
+            try:
+                pygame.mixer.Sound("sounds/tick.wav").play()
+            except Exception as e:
+                print(f"tick 播放失敗: {e}")
+        threading.Thread(target=_tick, daemon=True).start()
+
+    def stop_tick(self):
+        try:
+            pygame.mixer.stop()
+        except:
+            pass
+
+    def play_ding(self):
+        def _ding():
+            try:
+                pygame.mixer.Sound("sounds/ding.wav").play()
+            except:
+                pass
+        threading.Thread(target=_ding, daemon=True).start()

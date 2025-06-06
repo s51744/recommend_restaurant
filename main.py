@@ -7,6 +7,22 @@ from restaurant_manager import open_manager_window
 from PIL import Image, ImageTk
 import requests
 from io import BytesIO
+import pygame
+import threading
+
+# 初始化音效
+pygame.mixer.init()
+pygame.mixer.music.load("sounds/bg.wav")
+pygame.mixer.music.play(-1)  # -1 表示無限循環
+
+
+def play_sound(sound_path):
+    def _play():
+        try:
+            pygame.mixer.Sound(sound_path).play()
+        except Exception as e:
+            print(f"音效播放失敗: {e}")
+    threading.Thread(target=_play, daemon=True).start()
 
 # 載入餐廳資料
 with open('restaurants.json', 'r', encoding='utf-8') as f:
@@ -61,13 +77,15 @@ prompt_label.pack(pady=10)
 
 label_info = tk.Label(center_frame,
     text=(
-        "請點擊下方按鈕開始抽選...\n\n"
-        "📜 規則小提醒：\n"
-        "1. 可以選擇是否只抽今日營業\n"
-        "2. 可設定卡路里與價格範圍,若未輸入就是0與∞\n"
-        "3. 有快速／慢速模式可做切換\n\n"
-        "讓命運決定你的午餐，也許下一餐就是命中注定！"
-        "\n\n\n\n\n\n\n\n還不趕緊點擊按鈕抽選...等的我都餓了"
+    "請點擊下方按鈕開始抽選...\n\n"
+    "📜 規則小提醒：\n"
+    "1. 可以選擇是否只抽今日營業\n"
+    "2. 可設定卡路里與價格範圍，若未輸入就是 0 與 ∞\n"
+    "3. 有快速／慢速模式可做切換\n"
+    "4. 點擊左下方📂可以自訂專屬你自己的餐廳資料庫\n"
+    "5. 點擊正下方🤖可輸入偏好，讓AI幫你推薦午餐\n\n"
+    "讓命運決定你的午餐，也許下一餐就是命中決定！"
+    "\n\n\n\n\n\n還不趕緊點擊按鈕抽選...等的我都餓了"
     ),
     bg=bg_color, fg=fg_color, font=("微軟正黑體", 12),
     justify="left", wraplength=380, anchor="w")
@@ -92,66 +110,35 @@ create_range_input("卡路里", entry_cal_min, entry_cal_max)
 entry_price_min = tk.Entry(filter_frame, width=6)
 entry_price_max = tk.Entry(filter_frame, width=6)
 create_range_input("價格", entry_price_min, entry_price_max)
-# --- 按鈕區 ---
-btn_frame = tk.Frame(root, bg=bg_color)
-btn_frame.pack(pady=15)
+
+# --- 初始化 Picker ---
+picker = RandomPicker(restaurants, label_info, label_img, btn_pick=None, root=root)
+
+def safe_int(entry, default):
+    val = entry.get().strip()
+    return int(val) if val.isdigit() else default
 
 def toggle_open_today():
     picker.set_filter_open_today(not picker.filter_open_today)
     btn_filter.config(text=f"只抽今日有營業 ({'ON' if picker.filter_open_today else 'OFF'})")
 
-btn_filter = tk.Button(btn_frame, text="只抽今日有營業 (OFF)", command=toggle_open_today,
-                       bg=btn_color, fg=fg_color, activebackground=accent_color,
-                       font=("微軟正黑體", 14, "bold"), width=24, padx=14, pady=8)
-btn_filter.pack(side=tk.LEFT, padx=10)
+def toggle_open_today_with_sound():
+    new_state = not picker.filter_open_today
+    picker.set_filter_open_today(new_state)
+    btn_filter.config(text=f"只抽今日有營業 ({'ON' if new_state else 'OFF'})")
+    play_sound("sounds/open.wav" if new_state else "sounds/close.wav")
+
 
 def toggle_mode():
     picker.set_quick_mode(not picker.quick_mode)
     btn_toggle.config(text=f"🎯 模式: {'快速模式' if picker.quick_mode else '慢速模式'}")
 
-btn_toggle = tk.Button(btn_frame, text="🎯 模式: 慢速模式", command=toggle_mode,
-                       bg=btn_color, fg=fg_color, activebackground=accent_color,
-                       font=("微軟正黑體", 14, "bold"), width=24, padx=14, pady=8)
-btn_toggle.pack(side=tk.LEFT, padx=10)
+def toggle_mode_with_sound():
+    new_state = not picker.quick_mode
+    picker.set_quick_mode(new_state)
+    btn_toggle.config(text=f"🎯 模式: {'快速模式' if new_state else '慢速模式'}")
+    play_sound("sounds/open.wav" if new_state else "sounds/close.wav")
 
-btn_pick = tk.Button(btn_frame, text="🎲 隨機抽餐廳", font=("微軟正黑體", 14, "bold"),
-                     width=24, padx=14, pady=8, command=None,
-                     bg=accent_color, fg="black", relief="flat")
-btn_pick.pack(side=tk.LEFT, padx=10)
-
-btn_manage = tk.Button(root, text="📂 管理餐廳資料", command=open_manager_window,
-                       bg="#3a3a5a", fg="white", font=("微軟正黑體", 11), relief="flat")
-btn_manage.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
-
-
-
-# --- AI 區 ---
-def get_recommendation():
-    preference = entry_preference.get()
-    if not preference:
-        messagebox.showwarning("輸入錯誤", "請輸入你的午餐偏好")
-        return
-    result = get_ai_recommendation(preference, restaurants)
-    messagebox.showinfo("AI 推薦結果", result)
-
-ai_input_frame = tk.Frame(root, bg=bg_color)
-ai_input_frame.pack(pady=10)
-
-entry_preference = tk.Entry(ai_input_frame, font=("微軟正黑體", 11), width=40)
-entry_preference.pack(side=tk.LEFT, padx=(0, 10))
-entry_preference.insert(0, "")
-
-btn_ai = tk.Button(ai_input_frame, text="🤖 AI 推薦午餐", font=("微軟正黑體", 11, "bold"),
-                   command=get_recommendation, bg="#00ffaa", fg="black",
-                   relief="flat", width=18)
-btn_ai.pack(side=tk.LEFT, padx=(10, 0))
-
-# --- 初始化 Picker ---
-picker = RandomPicker(restaurants, label_info, label_img, btn_pick, root)
-
-def safe_int(entry, default):
-    val = entry.get().strip()
-    return int(val) if val.isdigit() else default
 
 def start_with_filter():
     try:
@@ -163,8 +150,64 @@ def start_with_filter():
         picker.set_price_range(price_min, price_max)
         picker.start()
     except Exception as e:
-        messagebox.showerror("錯誤", f"請確認欄位內容為數字\\n錯誤訊息：{str(e)}")
+        messagebox.showerror("錯誤", f"請確認欄位內容為數字\n錯誤訊息：{str(e)}")
 
-btn_pick.config(command=start_with_filter)
+def start_with_filter_with_sound():
+    play_sound("sounds/button.mp3")
+    start_with_filter()
+
+def open_manager_window_with_sound():
+    play_sound("sounds/box.wav")
+    open_manager_window()
+
+def get_recommendation():
+    preference = entry_preference.get()
+    if not preference:
+        messagebox.showwarning("輸入錯誤", "請輸入你的午餐偏好")
+        return
+    result = get_ai_recommendation(preference, restaurants)
+    messagebox.showinfo("AI 推薦結果", result)
+
+def get_recommendation_with_sound():
+    play_sound("sounds/bot.wav")
+    get_recommendation()
+
+# --- 按鈕區 ---
+btn_frame = tk.Frame(root, bg=bg_color)
+btn_frame.pack(pady=15)
+
+btn_filter = tk.Button(btn_frame, text="只抽今日有營業 (OFF)", command=toggle_open_today_with_sound,
+                       bg=btn_color, fg=fg_color, activebackground=accent_color,
+                       font=("微軟正黑體", 14, "bold"), width=24, padx=14, pady=8)
+btn_filter.pack(side=tk.LEFT, padx=10)
+
+btn_toggle = tk.Button(btn_frame, text="🎯 模式: 慢速模式", command=toggle_mode_with_sound,
+                       bg=btn_color, fg=fg_color, activebackground=accent_color,
+                       font=("微軟正黑體", 14, "bold"), width=24, padx=14, pady=8)
+btn_toggle.pack(side=tk.LEFT, padx=10)
+
+btn_pick = tk.Button(btn_frame, text="🎲 隨機抽餐廳", font=("微軟正黑體", 14, "bold"),
+                     width=24, padx=14, pady=8, command=start_with_filter_with_sound,
+                     bg=accent_color, fg="black", relief="flat")
+btn_pick.pack(side=tk.LEFT, padx=10)
+
+picker.btn_pick = btn_pick
+
+btn_manage = tk.Button(root, text="📂 管理餐廳資料", command=open_manager_window_with_sound,
+                       bg="#3a3a5a", fg="white", font=("微軟正黑體", 11), relief="flat")
+btn_manage.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
+
+# --- AI 區 ---
+ai_input_frame = tk.Frame(root, bg=bg_color)
+ai_input_frame.pack(pady=10)
+
+entry_preference = tk.Entry(ai_input_frame, font=("微軟正黑體", 11), width=40)
+entry_preference.pack(side=tk.LEFT, padx=(0, 10))
+entry_preference.insert(0, "")
+
+btn_ai = tk.Button(ai_input_frame, text="🤖 AI 推薦午餐", font=("微軟正黑體", 11, "bold"),
+                   command=get_recommendation_with_sound, bg="#00ffaa", fg="black",
+                   relief="flat", width=18)
+btn_ai.pack(side=tk.LEFT, padx=(10, 0))
 
 root.mainloop()

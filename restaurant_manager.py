@@ -4,6 +4,8 @@ from PIL import Image, ImageTk
 import json
 import requests
 from io import BytesIO
+import pygame
+import threading
 
 bg_color = "#1e1e2f"
 fg_color = "white"
@@ -11,16 +13,36 @@ border_color = "#444"
 card_bg = "#2a2a3d"
 font_main = ("微軟正黑體", 13)
 
+pygame.mixer.init()
+
+def play_sound(sound_path):
+    def _play():
+        try:
+            pygame.mixer.Sound(sound_path).play()
+        except:
+            pass
+    threading.Thread(target=_play, daemon=True).start()
+
+def play_click_sound():
+    play_sound("sounds/button.mp3")
+
+def play_confirm_sound():
+    play_sound("sounds/confirm.wav")
+
+def play_no_sound():
+    play_sound("sounds/no.wav")
+
 with open('restaurants.json', 'r', encoding='utf-8') as f:
     restaurants = json.load(f)
 
 def open_manager_window():
+    play_click_sound()
     manager = Toplevel()
     manager.title("🍱 餐廳資料管理")
     manager.geometry("1000x700")
     manager.configure(bg=bg_color)
 
-    close_btn = tk.Button(manager, text="✖", command=manager.destroy,
+    close_btn = tk.Button(manager, text="✖", command=lambda: [play_click_sound(), manager.destroy()],
                           bg=bg_color, fg="gray", font=("微軟正黑體", 10), relief="flat")
     close_btn.pack(anchor="ne", padx=10, pady=5)
 
@@ -80,10 +102,10 @@ def open_manager_window():
         btns.pack(anchor="e", pady=5)
 
         def make_delete_func(name):
-            return lambda: delete_restaurant(name, manager)
+            return lambda: [play_no_sound(), delete_restaurant(name, manager)]
 
         def make_edit_func(data):
-            return lambda: open_edit_form(data, manager)
+            return lambda: [play_click_sound(), open_edit_form(data, manager)]
 
         tk.Button(btns, text="📝 編輯", command=make_edit_func(r),
                   bg="#2196f3", fg="white", font=("微軟正黑體", 10), relief="flat", padx=8).pack(side="left", padx=5)
@@ -94,7 +116,7 @@ def open_manager_window():
     bottom_btn_frame = tk.Frame(manager, bg=bg_color)
     bottom_btn_frame.pack(side="bottom", anchor="se", pady=15, padx=15)
 
-    tk.Button(bottom_btn_frame, text="✚ 新增餐廳", command=lambda: open_edit_form(None, manager),
+    tk.Button(bottom_btn_frame, text="✚ 新增餐廳", command=lambda: [play_confirm_sound(), open_edit_form(None, manager)],
               bg="#4caf50", fg="white", font=("微軟正黑體", 12), relief="flat", padx=10, pady=5).pack(anchor="e")
 
 def delete_restaurant(name, window):
@@ -102,6 +124,7 @@ def delete_restaurant(name, window):
     confirm = messagebox.askyesno("確定刪除", f"你確定要刪除「{name}」嗎？")
     if not confirm:
         return
+    play_no_sound()
     restaurants = [r for r in restaurants if r['name'] != name]
     with open('restaurants.json', 'w', encoding='utf-8') as f:
         json.dump(restaurants, f, ensure_ascii=False, indent=2)
@@ -143,6 +166,7 @@ def open_edit_form(data, parent):
         hour_entries[day] = e
 
     def submit():
+        play_confirm_sound()
         new_data = {
             "name": name_entry.get().strip(),
             "address": addr_entry.get().strip(),
