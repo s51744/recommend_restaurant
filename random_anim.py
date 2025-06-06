@@ -21,17 +21,43 @@ class RandomPicker:
         self.quick_mode = False
         self.filter_open_today = False
 
+        # 篩選條件（預設為最大範圍）
+        self.calorie_min = 0
+        self.calorie_max = float("inf")
+        self.price_min = 0
+        self.price_max = float("inf")
+
     def set_quick_mode(self, quick: bool):
         self.quick_mode = quick
 
     def set_filter_open_today(self, filter_open: bool):
         self.filter_open_today = filter_open
 
+    def set_calorie_range(self, cal_min: int, cal_max: int):
+        self.calorie_min = cal_min
+        self.calorie_max = cal_max
+
+    def set_price_range(self, price_min: int, price_max: int):
+        self.price_min = price_min
+        self.price_max = price_max
+
     def get_restaurants_to_pick(self):
-        if not self.filter_open_today:
-            return self.restaurants
         today = datetime.datetime.today().strftime("%A")
-        return [r for r in self.restaurants if r.get('hours', {}).get(today, '') not in ['休息', '不明']]
+
+        # 僅符合價格與卡路里範圍的餐廳
+        filtered = [
+            r for r in self.restaurants
+            if self.calorie_min <= r.get("calories", 0) <= self.calorie_max
+            and self.price_min <= r.get("price", 0) <= self.price_max
+        ]
+
+        if self.filter_open_today:
+            filtered = [
+                r for r in filtered
+                if r.get("hours", {}).get(today, "") not in ["休息", "不明"]
+            ]
+
+        return filtered
 
     def show_restaurant(self, chosen):
         today = datetime.datetime.today().strftime("%A")
@@ -65,9 +91,6 @@ class RandomPicker:
             pady=10
         )
 
-
-
-        # 圖片載入處理
         url = chosen.get('image_url', '')
         if url:
             try:
@@ -90,7 +113,7 @@ class RandomPicker:
         restaurants_to_pick = self.get_restaurants_to_pick()
         if not restaurants_to_pick:
             self.btn_pick.config(state='normal')
-            self.label_info.config(text="😢 今天沒有符合條件的餐廳")
+            self.label_info.config(text="😢 沒有符合條件的餐廳")
             self.label_img.config(image='', text="😴", bg="black")
             self.label_img.image = None
             return
