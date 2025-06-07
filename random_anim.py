@@ -141,6 +141,8 @@ class RandomPicker:
             self.show_restaurant(chosen)
             self.btn_pick.config(state='normal')
             self.play_ding()
+            if self.after_spin_callback:
+                self.after_spin_callback()
         else:
             if self.current_interval > self.max_interval:
                 chosen = random.choice(restaurants_to_pick)
@@ -149,13 +151,16 @@ class RandomPicker:
                 self.current_interval = self.interval
                 self.stop_tick()
                 self.play_ding()
+                if self.after_spin_callback:
+                    self.after_spin_callback()
             else:
                 chosen = random.choice(restaurants_to_pick)
                 self.show_restaurant(chosen)
                 self.current_interval = int(self.current_interval * self.step)
                 self.root.after(self.current_interval, self.random_animation)
 
-    def start(self):
+    def start(self, after_spin_callback=None):
+        self.after_spin_callback = after_spin_callback  # 新增 callback 儲存
         self.btn_pick.config(state='disabled')
         self.current_interval = self.interval
 
@@ -189,13 +194,17 @@ class RandomPicker:
                 except:
                     pass
             threading.Thread(target=_cry, daemon=True).start()
+
+            # callback（錯誤也要呼叫一次）
+            if self.after_spin_callback:
+                self.after_spin_callback()
             return
 
-        # 只有在有資料時才播放 tick 音效
         if not self.quick_mode:
             self.play_tick()
 
         self.random_animation()
+
 
 
     def play_tick(self):

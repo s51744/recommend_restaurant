@@ -10,6 +10,7 @@ from io import BytesIO
 import pygame
 import threading
 import webbrowser
+from datetime import datetime
 
 # 初始化音效
 pygame.mixer.init()
@@ -61,12 +62,23 @@ root = tk.Tk()
 root.title("餐廳選擇機")
 root.geometry("980x695")
 root.configure(bg=bg_color)
-root.resizable(True, True)
+root.resizable(False, False)  #禁止水平與垂直調整視窗大小
 
 # 音效開關按鈕（僅控制背景音樂）
 btn_music = tk.Button(root, text="🎵", command=toggle_music,
                       bg=bg_color, fg="white", font=("微軟正黑體", 12), relief="flat")
 btn_music.place(x=10, y=10)
+
+# --- 時間顯示在右上角 ---
+def update_time():
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    time_label.config(text=now)
+    root.after(1000, update_time)
+
+time_label = tk.Label(root, font=("微軟正黑體", 10), fg="#cccccc", bg=bg_color)
+time_label.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
+
+update_time()
 
 # --- 標題 ---
 title_label = tk.Label(root, text="🍜 餐廳選擇機", bg=bg_color, fg=accent_color,
@@ -108,13 +120,14 @@ label_info = tk.Label(center_frame,
     "請點擊下方按鈕開始抽選...\n\n"
     "📜 規則小提醒：\n"
     "1. 可選擇是否只抽出今日營業的餐廳\n"
-    "2. 可自訂卡路里與價格範圍，留空則預設為 0～∞\n"
-    "3. 可切換『快速模式』與『慢速模式』\n"
-    "4. 點擊左下角📂管理你的專屬餐廳清單\n"
-    "5. 點擊下方🤖輸入偏好，讓AI幫你推薦\n"
-    "6. 抽出後可點右下角📍一鍵開啟Google地圖查詢位置\n\n"
+    "2. 右上角有提醒目前時間，別撲了個空了\n"
+    "3. 可自訂卡路里與價格範圍，留空則預設為 0～∞\n"
+    "4. 可切換『快速模式』與『慢速模式』\n"
+    "5. 點擊左下角📂管理你的專屬餐廳清單\n"
+    "6. 點擊下方🤖輸入偏好，讓AI幫你推薦\n"
+    "7. 抽出後可點右下角📍一鍵開啟Google地圖查詢位置\n\n"
     "讓命運決定你的午餐，也許下一餐就是命中決定！"
-    "\n\n\n\n\n還不趕緊點擊按鈕抽選...等的我都餓了"
+    "\n\n\n\n還不趕緊點擊按鈕抽選...等的我都餓了"
     ),
     bg=bg_color, fg=fg_color, font=("微軟正黑體", 12),
     justify="left", wraplength=380, anchor="w")
@@ -162,19 +175,26 @@ def toggle_mode_with_sound():
 
 def start_with_filter():
     try:
+        set_buttons_state("disabled")  # 🔒 全部按鈕關閉
         cal_min = safe_int(entry_cal_min, 0)
         cal_max = safe_int(entry_cal_max, 99999)
         price_min = safe_int(entry_price_min, 0)
         price_max = safe_int(entry_price_max, 99999)
         picker.set_calorie_range(cal_min, cal_max)
         picker.set_price_range(price_min, price_max)
-        picker.start()
+
+        def after_spin():
+            global selected_restaurant_name
+            selected_restaurant_name = picker.last_picked_name
+            btn_map.config(state=tk.NORMAL)
+            set_buttons_state("normal")  # 🔓 恢復可點擊狀態
+
+        picker.start(after_spin_callback=after_spin)
+
     except Exception as e:
+        set_buttons_state("normal")  # 錯誤時也要恢復
         messagebox.showerror("錯誤", f"請確認欄位內容為數字\n錯誤訊息：{str(e)}")
 
-    global selected_restaurant_name
-    selected_restaurant_name = picker.last_picked_name
-    btn_map.config(state=tk.NORMAL)
 
 def start_with_filter_with_sound():
     play_sound("sounds/button.mp3")
@@ -194,8 +214,12 @@ def get_recommendation():
 
 def get_recommendation_with_sound():
     play_sound("sounds/bot.wav")
+    
     get_recommendation()
-
+def open_map_with_sound():
+    play_sound("sounds/bye.wav")
+    open_map_for_restaurant(picker.last_picked_name, picker.last_picked_address)
+    
 # --- 按鈕區 ---
 btn_frame = tk.Frame(root, bg=bg_color)
 btn_frame.pack(pady=15)
@@ -229,10 +253,18 @@ btn_manage = tk.Button(root, text="📂 管理餐廳資料", command=open_manage
 btn_manage.place(relx=0.0, rely=1.0, anchor="sw", x=10, y=-10)
 
 btn_map = tk.Button(root, text="📍 打開地圖", font=("微軟正黑體", 11, "bold"),
-                    command=lambda: open_map_for_restaurant(picker.last_picked_name, picker.last_picked_address),
-                    bg="#00cc99", fg="black", activebackground="#00ffaa",
-                    relief="raised", bd=3, cursor="hand2", state=tk.DISABLED)
+    command=open_map_with_sound,
+    bg="#00cc99", fg="black", activebackground="#00ffaa",
+    relief="raised", bd=3, cursor="hand2", state=tk.DISABLED)
 btn_map.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
+
+def set_buttons_state(state):
+    btn_filter.config(state=state)
+    btn_toggle.config(state=state)
+    btn_pick.config(state=state)
+    btn_manage.config(state=state)
+    btn_ai.config(state=state)
+    btn_map.config(state=state if picker.last_picked_name else tk.DISABLED)
 
 # --- AI 區 ---
 ai_input_frame = tk.Frame(root, bg=bg_color)

@@ -1,19 +1,19 @@
 [
   {
     "name": "芮誼廚房",
-    "address": "宜蘭市女中路三段51號",
+    "address": "260宜蘭縣宜蘭市女中路三段51號",
     "hours": {
-      "Monday": "不明",
-      "Tuesday": "不明",
-      "Wednesday": "不明",
-      "Thursday": "不明",
-      "Friday": "不明",
-      "Saturday": "不明",
-      "Sunday": "不明"
+      "Monday": "17:00-20:00",
+      "Tuesday": "17:00-20:00",
+      "Wednesday": "休息",
+      "Thursday": "17:00-20:00",
+      "Friday": "17:00-20:00",
+      "Saturday": "17:00-20:00",
+      "Sunday": "休息"
     },
     "image_url": "https://scontent.ftpe12-2.fna.fbcdn.net/v/t39.30808-6/474393492_584214837851443_5645442884436142964_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=aSzAFUtzhkkQ7kNvwFy5-_E&_nc_oc=AdkGn30IXRgTUbkMaduIndxxw5kA52N01B4PKV0CjQWALjieTjmaojpt5nzLonBgm-btrvS5VqEVbAz1m3Uy3ZIU&_nc_zt=23&_nc_ht=scontent.ftpe12-2.fna&_nc_gid=ajXPjv6W9o7QMCqj0wlhDA&oh=00_AfO73ek3rORjMBGPvoZz8E6MTrSDb6bOu-RxL0PfyETxFA&oe=68488528",
-    "calories": 450,
-    "price": 150
+    "calories": 650,
+    "price": 130
   },
   {
     "name": "光腳ㄚ",
@@ -28,7 +28,7 @@
       "Sunday": "休息"
     },
     "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nr85mc8YHrM7Q3GFzQJIjK9CR-2wcsvO-icIFiV9O6dtvl-BS-Pdthn2jTyg38bz12T10aNvIFGn7NENzHqL6oiym6C8hUIkigVykLBbJJ9jAxsQ26FGSBKtJ8KypI2hcVAlscaBYAPmhQ=s680-w680-h510-rw",
-    "calories": 1000,
+    "calories": 900,
     "price": 100
   },
   {
@@ -44,8 +44,8 @@
       "Sunday": "06:00-00:00"
     },
     "image_url": "https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2024/11/18/2/30925759.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=800&exp=3600",
-    "calories": 300,
-    "price": 100
+    "calories":  1200,
+    "price": 220
   },
   {
     "name": "TOASTMAN 吐司男",
@@ -61,7 +61,7 @@
     },
     "image_url": "https://live.staticflickr.com/65535/52075083774_8636d4e4a8_o.jpg",
     "calories": 500,
-    "price": 100
+    "price": 70
   },
   {
     "name": "再一碗",
@@ -76,7 +76,7 @@
       "Sunday": "休息"
     },
     "image_url": "https://tb-static.uber.com/prod/image-proc/processed_images/a9c06937b75a5efda2769a34726fb9f8/58f691da9eaef86b0b51f9b2c483fe63.jpeg",
-    "calories": 550,
+    "calories": 750,
     "price": 100
   },
   {
@@ -124,7 +124,7 @@
       "Sunday": "11:00-14:30、17:00-20:30"
     },
     "image_url": "https://lh3.googleusercontent.com/Xe0k_VS-mYJo2CR21e1T6hY-b_V8bKqH8OXT63TxNo7YtvN6EVEkfjdLNcIOjHtruzYE_wZNQWFHTTx6OqNLnTRay8mMuu70Pas2C0ypU-A2WA=s800",
-    "calories": 450,
+    "calories": 850,
     "price": 300
   },
   {
@@ -140,7 +140,7 @@
       "Sunday": "11:00-19:30"
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/n3ch-listing.jpg",
-    "calories": 550,
+    "calories": 650,
     "price": 100
   },
   {
@@ -156,7 +156,7 @@
       "Sunday": "11:30-14:00、17:00-21:00"
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/yt6j-listing.jpg",
-    "calories": 400,
+    "calories": 900,
     "price": 300
   },
   {
@@ -172,8 +172,8 @@
       "Sunday": "14:30-18:00"
     },
     "image_url": "https://img.ltn.com.tw/Upload/news/600/2009/09/27/74.jpg",
-    "calories": 350,
-    "price": 100
+    "calories": 400,
+    "price": 40
   },
   {
     "name": "赤城鐵板燒料理",
@@ -188,7 +188,7 @@
       "Sunday": "11:00-14:00、17:00-20:30"
     },
     "image_url": "https://lh5.googleusercontent.com/p/AF1QipNr_GRW2sQ07Hh7FyRnQzwYH3U3qyWjLVuD-ynB=s1024",
-    "calories": 670,
+    "calories": 800,
     "price": 300
   },
   {
@@ -204,7 +204,7 @@
       "Sunday": "11:00-20:40"
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/r4ys-listing.jpg",
-    "calories": 450,
+    "calories": 550,
     "price": 100
   },
   {
@@ -220,7 +220,7 @@
       "Sunday": "09:30-18:30"
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/i2n1-listing.jpg",
-    "calories": 490,
+    "calories": 590,
     "price": 100
   },
   {
@@ -236,7 +236,7 @@
       "Sunday": "休息"
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/w74j-listing.jpg",
-    "calories": 490,
+    "calories": 790,
     "price": 150
   },
   {
@@ -252,8 +252,8 @@
       "Sunday": "11:00-19:00"
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/a7ti-listing.jpg",
-    "calories": 250,
-    "price": 100
+    "calories": 600,
+    "price": 80
   },
   {
     "name": "享米飯堂 Siang Mi Fan Tang",
@@ -268,7 +268,7 @@
       "Sunday": "休息"
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/ka6n-hero.jpg?width=512&height=384&quality=45",
-    "calories": 500,
+    "calories": 700,
     "price": 100
   },
   {
@@ -284,7 +284,7 @@
       "Sunday": "休息"
     },
     "image_url": "https://lh5.googleusercontent.com/p/AF1QipMdhQAqQ2QiksFyHPMuIxkAP6nCivpY76UumOkc=s1024",
-    "calories": 500,
+    "calories": 630,
     "price": 100
   },
   {
@@ -301,7 +301,7 @@
     },
     "image_url": "https://pboss.tw/wp-content/uploads/20201229002547_69.jpg",
     "calories": 450,
-    "price": 100
+    "price": 70
   },
   {
     "name": "宜大盤手工涼麵",
@@ -316,7 +316,7 @@
       "Sunday": "11:30-21:30"
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/kcu8-listing.jpg",
-    "calories": 300,
+    "calories": 500,
     "price": 100
   },
   {
@@ -332,8 +332,8 @@
       "Sunday": "休息"
     },
     "image_url": "https://lh5.googleusercontent.com/p/AF1QipPPiijG7XVlHFSZhfIMDEoC5ce1RkeNe_5eUnxc=s1024",
-    "calories": 300,
-    "price": 100
+    "calories": 380,
+    "price": 80
   },
   {
     "name": "咔必娜炸雞弁當",
@@ -348,8 +348,8 @@
       "Sunday": "11:00-22:30"
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/zs3l-listing.jpg",
-    "calories": 600,
-    "price": 100
+    "calories": 780,
+    "price": 120
   },
   {
     "name": "梁社漢排骨",
@@ -364,8 +364,8 @@
       "Sunday": "10:30-20:30"
     },
     "image_url": "https://etaiwan.blog/wp-content/uploads/20190813031347_76.jpg",
-    "calories": 550,
-    "price": 100
+    "calories": 950,
+    "price": 120
   },
   {
     "name": "八方雲集",
@@ -380,8 +380,8 @@
       "Sunday": "11:30-20:30"
     },
     "image_url": "https://tour-hualien-ws.hl.gov.tw/001/Upload/435/relpic/12302/709/f877ec23-af1d-45c9-b930-43a93a97bd67.jpeg",
-    "calories": 800,
-    "price": 100
+    "calories": 900,
+    "price": 90
   },
   {
     "name": "福品滷味",
