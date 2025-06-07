@@ -119,15 +119,16 @@ label_info = tk.Label(center_frame,
     text=(
     "請點擊下方按鈕開始抽選...\n\n"
     "📜 規則小提醒：\n"
-    "1. 可選擇是否只抽出今日營業的餐廳\n"
-    "2. 右上角有提醒目前時間，別撲了個空了\n"
-    "3. 可自訂卡路里與價格範圍，留空則預設為 0～∞\n"
-    "4. 可切換『快速模式』與『慢速模式』\n"
-    "5. 點擊左下角📂管理你的專屬餐廳清單\n"
-    "6. 點擊下方🤖輸入偏好，讓AI幫你推薦\n"
-    "7. 抽出後可點右下角📍一鍵開啟Google地圖查詢位置\n\n"
+    "1. 左上角可以把好聽的背景音樂關閉\n"
+    "2. 可選擇是否只抽出今日營業的餐廳\n"
+    "3. 右上角有提醒目前時間，別撲了個空了\n"
+    "4. 可自訂卡路里與價格範圍，留空則預設為 0～∞\n"
+    "5. 可切換『快速模式』與『慢速模式』\n"
+    "6. 點擊左下角📂管理你的專屬餐廳清單\n"
+    "7. 點擊下方🤖輸入偏好，讓AI幫你推薦\n"
+    "8. 抽出後可點右下角📍一鍵開啟Google地圖查詢位置\n\n"
     "讓命運決定你的午餐，也許下一餐就是命中決定！"
-    "\n\n\n\n還不趕緊點擊按鈕抽選...等的我都餓了"
+    "\n\n\n還不趕緊點擊按鈕抽選...等的我都餓了"
     ),
     bg=bg_color, fg=fg_color, font=("微軟正黑體", 12),
     justify="left", wraplength=380, anchor="w")
@@ -144,13 +145,32 @@ def create_range_input(label_text, min_var, max_var):
     min_var.pack(side=tk.LEFT)
     tk.Label(filter_frame, text="～", bg=bg_color, fg=fg_color).pack(side=tk.LEFT)
     max_var.pack(side=tk.LEFT, padx=(0, 20))
+    
+def set_entry_hint(entry, hint_text):
+    def on_focus_in(event):
+        if entry.get() == hint_text:
+            entry.delete(0, tk.END)
+            entry.config(fg="black")
+    def on_focus_out(event):
+        if not entry.get():
+            entry.insert(0, hint_text)
+            entry.config(fg="gray")
 
+    entry.insert(0, hint_text)
+    entry.config(fg="gray")
+    entry.bind("<FocusIn>", on_focus_in)
+    entry.bind("<FocusOut>", on_focus_out)
+    
 entry_cal_min = tk.Entry(filter_frame, width=6)
 entry_cal_max = tk.Entry(filter_frame, width=6)
+set_entry_hint(entry_cal_min, "0")
+set_entry_hint(entry_cal_max, "∞")
 create_range_input("卡路里", entry_cal_min, entry_cal_max)
 
 entry_price_min = tk.Entry(filter_frame, width=6)
 entry_price_max = tk.Entry(filter_frame, width=6)
+set_entry_hint(entry_price_min, "0")
+set_entry_hint(entry_price_max, "∞")
 create_range_input("價格", entry_price_min, entry_price_max)
 
 # --- 初始化 Picker ---
@@ -267,13 +287,13 @@ def set_buttons_state(state):
     btn_map.config(state=state if picker.last_picked_name else tk.DISABLED)
 
 # --- AI 區 ---
+
 ai_input_frame = tk.Frame(root, bg=bg_color)
 ai_input_frame.pack(pady=10)
 
 entry_preference = tk.Entry(ai_input_frame, font=("微軟正黑體", 11), width=40)
 entry_preference.pack(side=tk.LEFT, padx=(0, 10))
-entry_preference.insert(0, "")
-
+set_entry_hint(entry_preference, "請輸入你想吃的餐點…")
 btn_ai = tk.Button(ai_input_frame, text="🤖 AI 推薦午餐", font=("微軟正黑體", 11, "bold"),
                    command=get_recommendation_with_sound, bg="#00ffaa", fg="black",
                    relief="raised", bd=3, cursor="hand2", width=18)

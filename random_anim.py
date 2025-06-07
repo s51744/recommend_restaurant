@@ -20,9 +20,9 @@ class RandomPicker:
         self.last_picked_address = None
         self.root = root
 
-        self.interval = 30
-        self.max_interval = 500
-        self.step = 1.3
+        self.interval = 100
+        self.max_interval = 600
+        self.step = 1.2
         self.current_interval = self.interval
 
         self.quick_mode = False
@@ -146,6 +146,7 @@ class RandomPicker:
         else:
             if self.current_interval > self.max_interval:
                 chosen = random.choice(restaurants_to_pick)
+                self.play_tick()  # ✅ 播放最後一次 tick 聲音
                 self.show_restaurant(chosen)
                 self.btn_pick.config(state='normal')
                 self.current_interval = self.interval
@@ -155,9 +156,12 @@ class RandomPicker:
                     self.after_spin_callback()
             else:
                 chosen = random.choice(restaurants_to_pick)
+                self.play_tick()  # ✅ 每次轉動畫面就播放一次 spin 音效
                 self.show_restaurant(chosen)
                 self.current_interval = int(self.current_interval * self.step)
                 self.root.after(self.current_interval, self.random_animation)
+
+
 
     def start(self, after_spin_callback=None):
         self.after_spin_callback = after_spin_callback  # 新增 callback 儲存
@@ -210,9 +214,9 @@ class RandomPicker:
     def play_tick(self):
         def _tick():
             try:
-                pygame.mixer.Sound("sounds/tick.wav").play()
+                pygame.mixer.Sound("sounds/ding2.wav").play()
             except Exception as e:
-                print(f"tick 播放失敗: {e}")
+                print(f"spin 播放失敗: {e}")
         threading.Thread(target=_tick, daemon=True).start()
 
     def stop_tick(self):
@@ -224,7 +228,7 @@ class RandomPicker:
     def play_ding(self):
         def _ding():
             try:
-                pygame.mixer.Sound("sounds/ding.wav").play()
+                pygame.mixer.Sound("sounds/ok.wav").play()
             except:
                 pass
         threading.Thread(target=_ding, daemon=True).start()
