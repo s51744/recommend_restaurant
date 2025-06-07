@@ -2,6 +2,9 @@
   {
     "name": "芮誼廚房",
     "address": "260宜蘭縣宜蘭市女中路三段51號",
+    "price": 130,
+    "calories": 650,
+    "image_url": "https://scontent.ftpe12-2.fna.fbcdn.net/v/t39.30808-6/474393492_584214837851443_5645442884436142964_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=aSzAFUtzhkkQ7kNvwFy5-_E&_nc_oc=AdkGn30IXRgTUbkMaduIndxxw5kA52N01B4PKV0CjQWALjieTjmaojpt5nzLonBgm-btrvS5VqEVbAz1m3Uy3ZIU&_nc_zt=23&_nc_ht=scontent.ftpe12-2.fna&_nc_gid=ajXPjv6W9o7QMCqj0wlhDA&oh=00_AfO73ek3rORjMBGPvoZz8E6MTrSDb6bOu-RxL0PfyETxFA&oe=68488528",
     "hours": {
       "Monday": "17:00-20:00",
       "Tuesday": "17:00-20:00",
@@ -11,9 +14,7 @@
       "Saturday": "17:00-20:00",
       "Sunday": "休息"
     },
-    "image_url": "https://scontent.ftpe12-2.fna.fbcdn.net/v/t39.30808-6/474393492_584214837851443_5645442884436142964_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=aSzAFUtzhkkQ7kNvwFy5-_E&_nc_oc=AdkGn30IXRgTUbkMaduIndxxw5kA52N01B4PKV0CjQWALjieTjmaojpt5nzLonBgm-btrvS5VqEVbAz1m3Uy3ZIU&_nc_zt=23&_nc_ht=scontent.ftpe12-2.fna&_nc_gid=ajXPjv6W9o7QMCqj0wlhDA&oh=00_AfO73ek3rORjMBGPvoZz8E6MTrSDb6bOu-RxL0PfyETxFA&oe=68488528",
-    "calories": 650,
-    "price": 130
+    "category": ["義大利","飯","麵","咖哩"]
   },
   {
     "name": "光腳ㄚ",
@@ -29,7 +30,8 @@
     },
     "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nr85mc8YHrM7Q3GFzQJIjK9CR-2wcsvO-icIFiV9O6dtvl-BS-Pdthn2jTyg38bz12T10aNvIFGn7NENzHqL6oiym6C8hUIkigVykLBbJJ9jAxsQ26FGSBKtJ8KypI2hcVAlscaBYAPmhQ=s680-w680-h510-rw",
     "calories": 900,
-    "price": 100
+    "price": 100,
+    "category": ["水餃"]
   },
   {
     "name": "麥當勞",
@@ -45,7 +47,8 @@
     },
     "image_url": "https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2024/11/18/2/30925759.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=800&exp=3600",
     "calories": 1200,
-    "price": 220
+    "price": 220,
+    "category": ["速食","漢堡"]
   },
   {
     "name": "TOASTMAN 吐司男",
@@ -61,7 +64,8 @@
     },
     "image_url": "https://live.staticflickr.com/65535/52075083774_8636d4e4a8_o.jpg",
     "calories": 500,
-    "price": 70
+    "price": 70,
+    "category": ["吐司"]
   },
   {
     "name": "再一碗",
@@ -77,7 +81,8 @@
     },
     "image_url": "https://tb-static.uber.com/prod/image-proc/processed_images/a9c06937b75a5efda2769a34726fb9f8/58f691da9eaef86b0b51f9b2c483fe63.jpeg",
     "calories": 750,
-    "price": 100
+    "price": 100,
+    "category": ["便當","飯"]
   },
   {
     "name": "老蔡碳烤三明治",
@@ -93,7 +98,8 @@
       "Friday": "06:00-12:30",
       "Saturday": "06:00-12:30",
       "Sunday": "06:00-12:30"
-    }
+    },
+    "category": ["吐司"]
   },
   {
     "name": "築間幸福鍋物",
@@ -109,7 +115,8 @@
     },
     "image_url": "https://www.jhujian.com.tw/upload/2023_12_17/3_202312171813199hmlzo5We2.jpg",
     "calories": 2000,
-    "price": 500
+    "price": 500,
+    "category": ["鍋"]
   },
   {
     "name": "義饗家",
@@ -125,7 +132,8 @@
     },
     "image_url": "https://lh3.googleusercontent.com/Xe0k_VS-mYJo2CR21e1T6hY-b_V8bKqH8OXT63TxNo7YtvN6EVEkfjdLNcIOjHtruzYE_wZNQWFHTTx6OqNLnTRay8mMuu70Pas2C0ypU-A2WA=s800",
     "calories": 850,
-    "price": 300
+    "price": 300,
+    "category": ["義大利","麵"]
   },
   {
     "name": "豪初鍋燒麵",
@@ -141,7 +149,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/n3ch-listing.jpg",
     "calories": 650,
-    "price": 100
+    "price": 100,
+    "category": ["麵"]
   },
   {
     "name": "莿牛牛排館",
@@ -157,7 +166,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/yt6j-listing.jpg",
     "calories": 900,
-    "price": 300
+    "price": 300,
+    "category": ["牛排"]
   },
   {
     "name": "宜大蔥油餅",
@@ -173,7 +183,8 @@
     },
     "image_url": "https://img.ltn.com.tw/Upload/news/600/2009/09/27/74.jpg",
     "calories": 400,
-    "price": 40
+    "price": 40,
+    "category": ["小吃"]
   },
   {
     "name": "赤城鐵板燒料理",
@@ -189,7 +200,8 @@
     },
     "image_url": "https://lh5.googleusercontent.com/p/AF1QipNr_GRW2sQ07Hh7FyRnQzwYH3U3qyWjLVuD-ynB=s1024",
     "calories": 800,
-    "price": 300
+    "price": 300,
+    "category": ["鐵板"]
   },
   {
     "name": "魔術廚房",
@@ -205,7 +217,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/r4ys-listing.jpg",
     "calories": 550,
-    "price": 100
+    "price": 100,
+    "category": ["飯","麵"]
   },
   {
     "name": "竹園鴨莊",
@@ -221,7 +234,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/i2n1-listing.jpg",
     "calories": 590,
-    "price": 100
+    "price": 100,
+    "category": ["便當","飯"]
   },
   {
     "name": "艾奇司義式廚房",
@@ -237,11 +251,15 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/w74j-listing.jpg",
     "calories": 790,
-    "price": 150
+    "price": 150,
+    "category": ["義大利","麵"]
   },
   {
     "name": "IMwaffle現烤手工鬆餅",
     "address": "260宜蘭縣宜蘭市女中路三段149號",
+    "price": 80,
+    "calories": 600,
+    "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/a7ti-listing.jpg",
     "hours": {
       "Monday": "11:00-19:00",
       "Tuesday": "11:00-19:00",
@@ -251,9 +269,7 @@
       "Saturday": "休息",
       "Sunday": "11:00-19:00"
     },
-    "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/a7ti-listing.jpg",
-    "calories": 600,
-    "price": 80
+    "category": ["甜點","小吃"]
   },
   {
     "name": "享米飯堂 Siang Mi Fan Tang",
@@ -269,7 +285,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/ka6n-hero.jpg?width=512&height=384&quality=45",
     "calories": 700,
-    "price": 100
+    "price": 100,
+    "category": ["便當","飯","麵"]
   },
   {
     "name": "歡喜堂 便當-快餐",
@@ -285,7 +302,8 @@
     },
     "image_url": "https://lh5.googleusercontent.com/p/AF1QipMdhQAqQ2QiksFyHPMuIxkAP6nCivpY76UumOkc=s1024",
     "calories": 630,
-    "price": 100
+    "price": 100,
+    "category": ["便當","飯"]
   },
   {
     "name": "日十。早午食",
@@ -301,7 +319,8 @@
     },
     "image_url": "https://pboss.tw/wp-content/uploads/20201229002547_69.jpg",
     "calories": 450,
-    "price": 70
+    "price": 70,
+    "category": ["吐司","早餐"]
   },
   {
     "name": "宜大盤手工涼麵",
@@ -317,7 +336,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/kcu8-listing.jpg",
     "calories": 500,
-    "price": 100
+    "price": 100,
+    "category": ["麵"]
   },
   {
     "name": "非凡豆漿",
@@ -333,7 +353,8 @@
     },
     "image_url": "https://lh5.googleusercontent.com/p/AF1QipPPiijG7XVlHFSZhfIMDEoC5ce1RkeNe_5eUnxc=s1024",
     "calories": 380,
-    "price": 80
+    "price": 80,
+    "category": ["早餐","消夜"]
   },
   {
     "name": "咔必娜炸雞弁當",
@@ -349,7 +370,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/zs3l-listing.jpg",
     "calories": 780,
-    "price": 120
+    "price": 120,
+    "category": ["炸","便當"]
   },
   {
     "name": "梁社漢排骨",
@@ -365,7 +387,8 @@
     },
     "image_url": "https://etaiwan.blog/wp-content/uploads/20190813031347_76.jpg",
     "calories": 950,
-    "price": 120
+    "price": 120,
+    "category": ["便當","飯"]
   },
   {
     "name": "八方雲集",
@@ -381,7 +404,8 @@
     },
     "image_url": "https://tour-hualien-ws.hl.gov.tw/001/Upload/435/relpic/12302/709/f877ec23-af1d-45c9-b930-43a93a97bd67.jpeg",
     "calories": 900,
-    "price": 90
+    "price": 90,
+    "category": ["水餃"]
   },
   {
     "name": "福品滷味",
@@ -397,7 +421,8 @@
     },
     "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrqJlSlhf9b4cjQYZO8WWnrT7agj-w12jvlOq9_beoIla2vy3a-HoxNmNxLgmiCNphjTHIC-SsmdWcwh2WHZHNEP723VxLzt7iPcJTKm-bTS8ajyw3zbuPdVoNPlcXJ9VuFS4z-JQ=s680-w680-h510-rw",
     "calories": 800,
-    "price": 100
+    "price": 100,
+    "category": ["滷味"]
   },
   {
     "name": "逐日",
@@ -413,7 +438,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/zquo-listing.jpg",
     "calories": 554,
-    "price": 150
+    "price": 150,
+    "category": ["健康","便當","飯"]
   },
   {
     "name": "人吉牛丼",
@@ -429,7 +455,8 @@
     },
     "image_url": "https://d1ralsognjng37.cloudfront.net/34e20a1b-47b3-4dd9-b792-e9bfe37dd1d0.jpeg",
     "calories": 900,
-    "price": 140
+    "price": 140,
+    "category": ["飯"]
   },
   {
     "name": "牛麵",
@@ -445,7 +472,8 @@
     },
     "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nr_J0Fw6WbOTWy20g-i1QxDZksGUKaVdcVOKTFVO05fO2uvunxOCISX_7YXHBp0XIaCe36--y9wWPHqzvRi4YhNG9lGNZeGyuvooK4OZI44DP0zemUiR-btD34U0eExsXv8ZXEEJw=s1360-w1360-h1020-rw",
     "calories": 900,
-    "price": 120
+    "price": 120,
+    "category": ["麵"]
   },
   {
     "name": "鑫盛食坊",
@@ -461,7 +489,8 @@
     },
     "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nqnxUNZpVBWft-_5EPLHpkRvQgm99Ra2RIbRXFIdOUqD4HZo7qoqNjUvN6qne_szWkvvfMm4_g2uTNtY_ZfW9HOHnVGPoEbP9TXzDLUSzyn3YyshL_TnEfwzeRxWO_Sg47OS7ZW=s1360-w1360-h1020-rw",
     "calories": 800,
-    "price": 70
+    "price": 70,
+    "category": ["飯","麵"]
   },
   {
     "name": "三杯香滷味",
@@ -477,7 +506,8 @@
     },
     "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npEq7PH5vVwlGU9vZI9tu1iiLFMNVF_0qNCECdTMVHEn5N9IU4xGtgYbEIamUY_rj0xJ4fkDOtba1sKXqLZbFB5_4RgHMu5r7qT-fWP2NYBDhiE1dT8fWpMpP1CnxZmUaGcnU57=s1360-w1360-h1020-rw",
     "calories": 840,
-    "price": 120
+    "price": 120,
+    "category": ["滷味"]
   },
   {
     "name": "楊胖子蔥油餅 韭菜盒",
@@ -493,7 +523,8 @@
     },
     "image_url": "https://cc.tvbs.com.tw/img/program/upload/2021/04/14/20210414110140-c6c16b18.jpg",
     "calories": 400,
-    "price": 50
+    "price": 50,
+    "category": ["小吃"]
   },
   {
     "name": "復興鵝肉",
@@ -509,7 +540,8 @@
     },
     "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nruGRzteZqwhEUUkU6_bQVqAx61YYOPuAJg1c_sBMpqTjgO3z8YLItbE3B7pB45KAPd2b-9FnxRLNaSkrolL27QPNxvIGUsPimIDzopMo93HjfNTU8o9KwG6BjcUWkCfNYkxDwSOw=s680-w680-h510-rw",
     "calories": 700,
-    "price": 150
+    "price": 150,
+    "category": ["飯","麵"]
   },
   {
     "name": "火生餛飩麵店",
@@ -525,7 +557,8 @@
     },
     "image_url": "https://weieat.tw/wp-content/uploads/2023/06/DSC_2267.jpg",
     "calories": 600,
-    "price": 100
+    "price": 100,
+    "category": ["麵"]
   },
   {
     "name": "阿啾西拉麵圖書館",
@@ -541,7 +574,8 @@
     },
     "image_url": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npVoVZKWiuJEComEIkSVR0jB_G5ydkBKhsN9YxKN1kl494zsABVCNregU0qXMrFja9RppWd4OSzy1ROPEeWoeXv3MVCDiGfmLZSwpkDH7v4zk71B6OSXEViuQv1oiu6ZDHZxesl=s680-w680-h510-rw",
     "calories": 800,
-    "price": 150
+    "price": 150,
+    "category": ["麵","拉麵"]
   },
   {
     "name": "心之所嚮甜點專賣店",
@@ -557,7 +591,8 @@
     },
     "image_url": "https://elina0419.com/wp-content/uploads/2024/05/92A683A7-DF89-4560-B588-91A738127A8A.jpeg",
     "calories": 400,
-    "price": 120
+    "price": 120,
+    "category": ["甜點","小吃"]
   },
   {
     "name": "原來鮮肉小籠包",
@@ -573,7 +608,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/qewa-listing.jpg",
     "calories": 500,
-    "price": 65
+    "price": 65,
+    "category": ["湯包"]
   },
   {
     "name": "農權路炸醬麵",
@@ -589,7 +625,8 @@
     },
     "image_url": "https://flyblog.cc/wp-content/uploads/flickr/38331452812_362f401e7a_c.jpg",
     "calories": 600,
-    "price": 80
+    "price": 80,
+    "category": ["麵"]
   },
   {
     "name": "勁好檟平價牛排",
@@ -605,7 +642,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/mu24-listing.jpg",
     "calories": 800,
-    "price": 200
+    "price": 200,
+    "category": ["牛排"]
   },
   {
     "name": "南投意麵米糕",
@@ -621,7 +659,8 @@
     },
     "image_url": "https://imageproxy.pixnet.cc/imgproxy?url=https://farm9.staticflickr.com/8739/28243921984_a771386800_b.jpg",
     "calories": 600,
-    "price": 80
+    "price": 80,
+    "category": ["麵"]
   },
   {
     "name": "林聚裡臭臭鍋",
@@ -637,7 +676,8 @@
     },
     "image_url": "https://tb-static.uber.com/prod/image-proc/processed_images/f51cc40d3093de8cea671344e66d3a31/783282f6131ef2258e5bcd87c46aa87e.jpeg",
     "calories": 1000,
-    "price": 120
+    "price": 120,
+    "category": ["鍋"]
   },
   {
     "name": "誠意 池上便當",
@@ -653,7 +693,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/u8yw-listing.jpg",
     "calories": 720,
-    "price": 90
+    "price": 90,
+    "category": ["便當","飯"]
   },
   {
     "name": "日誠便當",
@@ -669,7 +710,8 @@
     },
     "image_url": "https://lh3.ggpht.com/p/AF1QipOTGklqziA2KIWXSHoWBnCrxfRGkysQ9wHUNbi9=s1024",
     "calories": 650,
-    "price": 75
+    "price": 75,
+    "category": ["便當","飯"]
   },
   {
     "name": "許家雞腿飯",
@@ -685,7 +727,8 @@
       "Friday": "11:00-14:00、17:00-20:00",
       "Saturday": "11:00-14:00、17:00-20:00",
       "Sunday": "休息"
-    }
+    },
+    "category": ["飯","便當"]
   },
   {
     "name": "蓁好珈快餐",
@@ -701,7 +744,8 @@
     },
     "image_url": "https://lh3.ggpht.com/p/AF1QipM1zkxxNq8co2mCruz0PhXiMZZlRIJfrqAy4bSX=s512",
     "calories": 750,
-    "price": 95
+    "price": 95,
+    "category": ["飯","便當"]
   },
   {
     "name": "吃完泡麵再走",
@@ -717,7 +761,8 @@
     },
     "image_url": "https://tb-static.uber.com/prod/image-proc/processed_images/45ee72411fd0ca1206241d3ca41e9e72/3ac2b39ad528f8c8c5dc77c59abb683d.jpeg",
     "calories": 700,
-    "price": 115
+    "price": 115,
+    "category": ["麵"]
   },
   {
     "name": "肉多多火鍋-宜蘭復興店",
@@ -733,7 +778,8 @@
     },
     "image_url": "https://cdn2.ettoday.net/images/3019/3019911.jpg",
     "calories": 1900,
-    "price": 450
+    "price": 450,
+    "category": ["鍋"]
   },
   {
     "name": "又見麵拉麵",
@@ -749,7 +795,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/products/12163236.jpg?width=%s",
     "calories": 750,
-    "price": 100
+    "price": 100,
+    "category": ["麵","拉麵"]
   },
   {
     "name": "鮮滿堂餃子館",
@@ -765,7 +812,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/gtgr-listing.jpg",
     "calories": 650,
-    "price": 80
+    "price": 80,
+    "category": ["水餃"]
   },
   {
     "name": "鮨兵衛",
@@ -781,7 +829,8 @@
     },
     "image_url": "https://beanangelinkorea.blog/wp-content/uploads/2023/06/DSC01875-1.jpg",
     "calories": 1000,
-    "price": 400
+    "price": 400,
+    "category": ["日本","壽司"]
   },
   {
     "name": "甜屋義大利麵",
@@ -797,7 +846,8 @@
     },
     "image_url": "https://images.deliveryhero.io/image/fd-tw/LH/d0hb-listing.JPG",
     "calories": 800,
-    "price": 120
+    "price": 120,
+    "category": ["麵","義大利"]
   },
   {
     "name": "麵工匠手工麵",
@@ -813,6 +863,7 @@
     },
     "image_url": "https://foodmap.sharelife.tw/tw-feat-store-img/352908/7a86151123372113.jpg",
     "calories": 900,
-    "price": 140
+    "price": 140,
+    "category": ["麵"]
   }
 ]
