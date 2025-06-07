@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import messagebox
 import json
 from random_anim import RandomPicker
@@ -16,6 +17,7 @@ from datetime import datetime
 pygame.mixer.init()
 pygame.mixer.music.load("sounds/bg.wav")
 pygame.mixer.music.play(-1)  # -1 表示無限循環
+pygame.mixer.music.set_volume(0.5) 
 
 sound_enabled = True
 music_enabled = True
@@ -37,17 +39,6 @@ def play_sound(sound_path):
             print(f"音效播放失敗: {e}")
     threading.Thread(target=_play, daemon=True).start()
 
-# 音樂控制函式
-def toggle_music():
-    global music_enabled
-    music_enabled = not music_enabled
-    if music_enabled:
-        pygame.mixer.music.play(-1)
-        btn_music.config(text="🎵")
-    else:
-        pygame.mixer.music.stop()
-        btn_music.config(text="❌")
-
 # 載入餐廳資料
 with open('restaurants.json', 'r', encoding='utf-8') as f:
     restaurants = json.load(f)
@@ -64,10 +55,78 @@ root.geometry("980x695")
 root.configure(bg=bg_color)
 root.resizable(False, False)  #禁止水平與垂直調整視窗大小
 
-# 音效開關按鈕（僅控制背景音樂）
-btn_music = tk.Button(root, text="🎵", command=toggle_music,
-                      bg=bg_color, fg="white", font=("微軟正黑體", 12), relief="flat")
-btn_music.place(x=10, y=10)
+# 設定滑桿樣式
+style = ttk.Style()
+style.theme_use("default")
+style.configure("Custom.Horizontal.TScale",
+    troughcolor="#555555",          # 滑道背景
+    background="#00ffc3",           # 滑塊顏色
+    sliderthickness=14,
+    bordercolor="#00ffc3",
+    lightcolor="#00ffc3",
+    darkcolor="#00ffc3"
+)
+
+# 音量狀態
+current_volume = 0.35
+is_muted = False
+pygame.mixer.music.set_volume(current_volume)
+
+# 音量切換
+def toggle_music():
+    global is_muted, current_volume
+    if is_muted:
+        pygame.mixer.music.set_volume(current_volume)
+        volume_slider.set(current_volume * 100)
+        btn_music.config(text="🎵")
+        is_muted = False
+    else:
+        current_volume = pygame.mixer.music.get_volume()
+        pygame.mixer.music.set_volume(0)
+        volume_slider.set(0)
+        btn_music.config(text="🔕")
+        is_muted = True
+
+# 調整音量
+def change_volume(val):
+    global current_volume, is_muted
+    volume = float(val) / 100
+    current_volume = volume
+    pygame.mixer.music.set_volume(volume)
+    if volume == 0:
+        btn_music.config(text="🔕")
+        is_muted = True
+    else:
+        btn_music.config(text="🎵")
+        is_muted = False
+
+# --- 音樂控制區塊 ---
+music_frame = tk.Frame(root, bg=bg_color)
+music_frame.place(x=10, y=10)
+
+btn_music = tk.Button(music_frame, text="🎵", command=toggle_music,
+                      bg=bg_color, fg="white", font=("微軟正黑體", 12),
+                      relief="flat", bd=0, highlightthickness=0, cursor="hand2")
+btn_music.pack(side=tk.LEFT)
+
+# 拿掉滑紐中的白線
+style.layout("Custom.Horizontal.TScale", [
+    ("Horizontal.Scale.trough", {"children": [
+        ("Horizontal.Scale.slider", {"side": "left", "sticky": ""})
+    ], "sticky": "we"})
+])
+
+volume_slider = ttk.Scale(
+    music_frame,
+    from_=0,
+    to=100,
+    orient="horizontal",
+    command=change_volume,
+    variable=tk.DoubleVar(value=current_volume * 100),
+    style="Custom.Horizontal.TScale",
+    length=130
+)
+volume_slider.pack(side=tk.LEFT, padx=(6, 0))
 
 # --- 時間顯示在右上角 ---
 def update_time():
@@ -119,10 +178,10 @@ label_info = tk.Label(center_frame,
     text=(
     "請點擊下方按鈕開始抽選...\n\n"
     "📜 規則小提醒：\n"
-    "1. 左上角可以把好聽的背景音樂關閉\n"
-    "2. 可選擇是否只抽出今日營業的餐廳\n"
-    "3. 右上角有提醒目前時間，別撲空了\n"
-    "4. 可自訂卡路里與價格範圍，留空則預設為 0～∞\n"
+    "1. 左上角可以調整好聽的背景音樂的音量\n"
+    "2. 右上角有提醒目前時間，別撲空了\n"
+    "3. 可自訂卡路里與價格範圍，留空則預設為 0～∞\n"
+    "4. 可選擇是否只抽出今日營業的餐廳\n"
     "5. 可切換『快速模式』與『慢速模式』\n"
     "6. 點擊左下角📂管理你的專屬餐廳清單\n"
     "7. 點擊下方🤖輸入偏好，讓AI幫你推薦\n"
