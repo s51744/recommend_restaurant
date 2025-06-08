@@ -20,9 +20,9 @@ class RandomPicker:
         self.last_picked_address = None
         self.root = root
 
-        self.interval = 100
-        self.max_interval = 600
-        self.step = 1.2
+        self.interval = 88
+        self.max_interval = 1111
+        self.step = 1.3
         self.current_interval = self.interval
 
         self.quick_mode = False
@@ -111,6 +111,49 @@ class RandomPicker:
             self.label_img.config(image='', text="❌ 沒有圖片", bg="black", fg="gray")
             self.label_img.image = None
 
+    def start(self, after_spin_callback=None):
+        self.after_spin_callback = after_spin_callback
+        self.btn_pick.config(state='disabled')
+        self.current_interval = self.interval
+        self.slow_left = None
+
+        restaurants_to_pick = self.get_restaurants_to_pick()
+        if not restaurants_to_pick:
+            self.btn_pick.config(state='normal')
+            self.label_info.config(
+                text="😩 沒有符合條件的餐廳！\n\n你太挑了啦！再不放寬一點，連泡麵都沒得吃 🍜",
+                font=("微軟正黑體", 13),
+                justify="left",
+                anchor="w",
+                wraplength=400,
+                pady=10
+            )
+            try:
+                img_url = "https://www.niusnews.com/upload/posts/po5_29953_1421316750.jpg"
+                response = requests.get(img_url)
+                img = Image.open(BytesIO(response.content))
+                img.thumbnail((500, 300), Image.LANCZOS)
+                photo = ImageTk.PhotoImage(img)
+                self.label_img.config(image=photo, text="", bg="black")
+                self.label_img.image = photo
+            except:
+                self.label_img.config(image='', text="⚠️ 圖片載入失敗", bg="black", fg="gray")
+                self.label_img.image = None
+
+            def _cry():
+                try:
+                    pygame.mixer.Sound("sounds/cry.mp3").play()
+                except:
+                    pass
+            threading.Thread(target=_cry, daemon=True).start()
+
+            if self.after_spin_callback:
+                self.after_spin_callback()
+            return
+
+        self.random_animation()
+
+
     def random_animation(self):
         restaurants_to_pick = self.get_restaurants_to_pick()
         if not restaurants_to_pick:
@@ -123,19 +166,10 @@ class RandomPicker:
                 wraplength=400,
                 pady=10
             )
-            try:
-                img_url = "https://www.niusnews.com/upload/posts/po5_29953_1421316750.jpg"
-                response = requests.get(img_url)
-                img = Image.open(BytesIO(response.content))
-                img.thumbnail((500, 300), Image.LANCZOS)
-                photo = ImageTk.PhotoImage(img)
-                self.label_img.config(image=photo, text="", bg="black")
-                self.label_img.image = photo
-            except:
-                self.label_img.config(image='', text="⚠️ 圖片載入失敗", bg="black", fg="gray")
-                self.label_img.image = None
+            self.label_img.config(image='', text="⚠️ 沒有圖片", bg="black", fg="gray")
             return
 
+        # 快速模式：直接抽
         if self.quick_mode:
             chosen = random.choice(restaurants_to_pick)
             self.show_restaurant(chosen)
@@ -143,71 +177,34 @@ class RandomPicker:
             self.play_ding()
             if self.after_spin_callback:
                 self.after_spin_callback()
-        else:
-            if self.current_interval > self.max_interval:
-                chosen = random.choice(restaurants_to_pick)
-                self.play_tick()  # ✅ 播放最後一次 tick 聲音
-                self.show_restaurant(chosen)
-                self.btn_pick.config(state='normal')
-                self.current_interval = self.interval
-                self.stop_tick()
-                self.play_ding()
-                if self.after_spin_callback:
-                    self.after_spin_callback()
-            else:
-                chosen = random.choice(restaurants_to_pick)
-                self.play_tick()  # ✅ 每次轉動畫面就播放一次 spin 音效
-                self.show_restaurant(chosen)
-                self.current_interval = int(self.current_interval * self.step)
-                self.root.after(self.current_interval, self.random_animation)
-
-
-
-    def start(self, after_spin_callback=None):
-        self.after_spin_callback = after_spin_callback  # 新增 callback 儲存
-        self.btn_pick.config(state='disabled')
-        self.current_interval = self.interval
-
-        restaurants_to_pick = self.get_restaurants_to_pick()
-        if not restaurants_to_pick:
-            self.btn_pick.config(state='normal')
-            self.label_info.config(
-                text="😩 沒有符合條件的餐廳！\n\n你太挑了啦！再不放寬一點，連泡麵都沒得吃 🍜",
-                font=("微軟正黑體", 13),
-                justify="left",
-                anchor="w",
-                wraplength=400,
-                pady=10
-            )
-            try:
-                img_url = "https://www.niusnews.com/upload/posts/po5_29953_1421316750.jpg"
-                response = requests.get(img_url)
-                img = Image.open(BytesIO(response.content))
-                img.thumbnail((500, 300), Image.LANCZOS)
-                photo = ImageTk.PhotoImage(img)
-                self.label_img.config(image=photo, text="", bg="black")
-                self.label_img.image = photo
-            except:
-                self.label_img.config(image='', text="⚠️ 圖片載入失敗", bg="black", fg="gray")
-                self.label_img.image = None
-
-            # 撥放哭音效
-            def _cry():
-                try:
-                    pygame.mixer.Sound("sounds/cry.mp3").play()
-                except:
-                    pass
-            threading.Thread(target=_cry, daemon=True).start()
-
-            # callback（錯誤也要呼叫一次）
-            if self.after_spin_callback:
-                self.after_spin_callback()
             return
 
-        if not self.quick_mode:
+        # 慢速模式流程
+        if self.current_interval >= self.max_interval:
+            # 最終前一張（max_interval），先播放這張後再等久一點
+            chosen = random.choice(restaurants_to_pick)
+            self.show_restaurant(chosen)
             self.play_tick()
 
-        self.random_animation()
+            #停久一點再播最終張
+            def show_final():
+                final_choice = random.choice(restaurants_to_pick)
+                self.show_restaurant(final_choice)
+                self.play_ding()
+                self.btn_pick.config(state='normal')
+                if self.after_spin_callback:
+                    self.after_spin_callback()
+
+            self.root.after(1888, show_final)
+            return
+
+        # 一般過程：持續遞增間隔
+        chosen = random.choice(restaurants_to_pick)
+        self.show_restaurant(chosen)
+        self.play_tick()
+        self.current_interval = int(self.current_interval * self.step)
+        self.root.after(self.current_interval, self.random_animation)
+
 
 
 
